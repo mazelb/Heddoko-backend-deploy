@@ -1,0 +1,9 @@
+﻿[
+  {
+    "outputFile": "Content/css/admin.css",
+    "inputFile": "Content/scss/admin.scss",
+    "minify": {
+      "enabled": true
+    }
+  }
+]

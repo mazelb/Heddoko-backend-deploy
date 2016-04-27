@@ -1,0 +1,18 @@
+﻿.margin010 {
+    @include margin-top-10();
+}
+
+.k-datepicker .k-tooltip-validation {
+    position: absolute;
+    top: 24px;
+    left: -1px;
+    white-space: initial;
+}
+
+.k-edit-form-container {
+    min-width: 460px;
+}
+.k-popup-edit-form .k-dropzone {
+    padding-top: 0px;
+    padding-left: 0px;
+}
