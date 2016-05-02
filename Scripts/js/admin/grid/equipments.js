@@ -58,7 +58,10 @@ var Equipments = {
 
         this.shipTypes.read();
 
-        this.equipments = new kendo.data.DataSource({
+        this.equipments = Equipments.getDatasource();
+    },
+    getDatasource: function(){
+        return new kendo.data.DataSource({
             pageSize: KendoDS.pageSize,
             serverPaging: true,
             serverFiltering: true,

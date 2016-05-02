@@ -110,7 +110,7 @@ i18n.Resources = (function () {
   "EmptyItems": "No item to display",
   "ID": "ID",
   "Identifier": "Identifier",
-  "SignOut": "SignOut",
+  "SignOut": "Sign out",
   "WrongObjectAccess": "You don't access to that object",
   "AddANew": "Add a new",
   "AnatomicalPosition": "Anatomical position",
@@ -161,7 +161,11 @@ i18n.Resources = (function () {
   "Ship": "Ship",
   "Status": "Status",
   "UserRoleType_LicenseAdmin": "License manager",
-  "VerifiedBy": "Verified by"
+  "VerifiedBy": "Verified by",
+  "Add": "Add",
+  "ComplexEquipment": "Suit",
+  "ComplexEquipments": "Suits",
+  "EnterComplexEquipment": "Enter a MAC address, a physical location, or a serial #"
 };
 	return $.extend({}, i18n.Resources || {}, strings);
 }());
