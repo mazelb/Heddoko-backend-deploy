@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Areas/HelpPage/Views/Help/DisplayTemplates/EnumTypeModelDescription.cshtml" hash="522cdc70" filehash="2fe16061970b" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Areas_HelpPage_Views_Help_DisplayTemplates_EnumTypeModelDescription_cshtml">
+<preserve resultType="2" virtualPath="/Areas/HelpPage/Views/Help/DisplayTemplates/EnumTypeModelDescription.cshtml" hash="522cdc70" filehash="3086b7675a59" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Areas_HelpPage_Views_Help_DisplayTemplates_EnumTypeModelDescription_cshtml">
   <filedeps>
     <filedep name="/Areas/HelpPage/Views/Help/DisplayTemplates/EnumTypeModelDescription.cshtml" />
   </filedeps>

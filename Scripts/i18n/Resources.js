@@ -165,7 +165,8 @@ i18n.Resources = (function () {
   "Add": "Add",
   "ComplexEquipment": "Suit",
   "ComplexEquipments": "Suits",
-  "EnterComplexEquipment": "Enter a MAC address, a physical location, or a serial #"
+  "EnterComplexEquipment": "Enter a MAC address, a physical location, or a serial #",
+  "Admin": "Admin"
 };
 	return $.extend({}, i18n.Resources || {}, strings);
 }());

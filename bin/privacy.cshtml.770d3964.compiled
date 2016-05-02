@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/Static/Privacy.cshtml" hash="32422a0" filehash="ffffe79f90a7e7e5" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Views_Static_Privacy_cshtml">
+<preserve resultType="2" virtualPath="/Views/Static/Privacy.cshtml" hash="32422a0" filehash="ffffe83dc0a4b637" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Views_Static_Privacy_cshtml">
   <filedeps>
     <filedep name="/Views/Static/Privacy.cshtml" />
   </filedeps>
