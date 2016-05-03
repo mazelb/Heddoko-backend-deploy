@@ -476,6 +476,23 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
+        <member name="M:Heddoko.Controllers.API.UsersAPIController.Profile">
+            <summary>
+            Get profile of current user
+            </summary>
+        </member>
+        <member name="M:Heddoko.Controllers.API.UsersAPIController.Signin(Heddoko.Models.SignInAPIViewModel)">
+            <summary>
+            Sign in user
+            </summary>
+            <param name="username">The username of user.</param>
+            <param name="password">The password of user.</param>
+        </member>
+        <member name="M:Heddoko.Controllers.API.UsersAPIController.Check">
+            <summary>
+            Check if token is valid
+            </summary>
+        </member>
         <member name="T:Snapbook.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator">
             <summary>
             Generates model descriptions for given types.

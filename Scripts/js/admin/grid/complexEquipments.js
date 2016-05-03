@@ -6,10 +6,13 @@ var ComplexEquipments = {
     controls: {
         grid: null,
         filterModel: null,
-        addModel: null
+        addModel: null,
+        popup: null,
+        popupModel: null
     },
     validators: {
-        modelValidator: null
+        addModel: null,
+        popupModel: null
     },
     datasources: function () {
         //Datasources context
@@ -87,6 +90,8 @@ var ComplexEquipments = {
         var control = $("#gridComplexEquipments");
         var filter = $('.ComplexEquipmentsFilter');
         var model = $('.ComplexEquipmentsForm');
+        var popup = $('#ComplexEquipmentPopup');
+        var popupModel = $('.ComplexEquipmentLinkForm');
 
         if (control.length > 0) {
             this.controls.grid = control.kendoGrid({
@@ -102,11 +107,11 @@ var ComplexEquipments = {
                     pageSizes: [10, 50, 100]
                 },
                 columns: [{
-                    field: 'macAddress',
-                    title: i18n.Resources.MacAddress
-                }, {
                     field: 'serialNo',
                     title: i18n.Resources.SerialNo
+                }, {
+                    field: 'macAddress',
+                    title: i18n.Resources.MacAddress
                 }, {
                     field: 'status',
                     title: i18n.Resources.Status,
@@ -172,10 +177,38 @@ var ComplexEquipments = {
 
                 }
             }).data("kendoValidator");
+
+            $(document).on('click', '.k-overlay', $.proxy(this.onClosePopup, this));
+
+            this.controls.popup = popup.kendoWindow({
+                title: i18n.Resources.Link + ' ' + i18n.Resources.Equipments,
+                modal: true,
+                pinned: true,
+                visible: false,
+                resizable: false,
+                draggable: false,
+                actions: [
+                    "Close"
+                ]
+            }).data('kendoWindow');
+
+            this.controls.popupModel = kendo.observable({
+                model: this.getEmptyPopupModel(),
+                equipments: Datasources.equipmentsLinkDD,
+                link: this.onLink,
+                reference: null
+            });
+
+            kendo.bind(popupModel, this.controls.popupModel);
+
+            this.validators.popupModel = popupModel.kendoValidator().data("kendoValidator");
+
         }
     },
     detailInit: function (e) {
         var datasourceEquipments = Equipments.getDatasource();
+
+        var reference = 'k-grid-link-' + e.data.id;
 
         var grid = $("<div/>").appendTo(e.detailCell).kendoGrid({
             dataSource: datasourceEquipments,
@@ -193,13 +226,16 @@ var ComplexEquipments = {
                 name: "create",
                 text: i18n.Resources.Add + ' ' + i18n.Resources.Equipment,
                 className: "k-grid-add btn-primary"
+            }, {
+                text: i18n.Resources.Link + ' ' + i18n.Resources.Equipment,
+                className: reference
             }],
             columns: [{
-                field: 'macAddress',
-                title: i18n.Resources.MacAddress
-            }, {
                 field: 'serialNo',
                 title: i18n.Resources.SerialNo
+            }, {
+                field: 'macAddress',
+                title: i18n.Resources.MacAddress
             }, {
                 field: 'status',
                 title: i18n.Resources.Status,
@@ -304,9 +340,9 @@ var ComplexEquipments = {
                     text: i18n.Resources.Edit,
                     className: "k-grid-edit"
                 }, {
-                    name: "destroy",
-                    text: i18n.Resources.Delete,
-                    className: "k-grid-delete"
+                    text: i18n.Resources.Unlink,
+                    className: "k-grid-unlink",
+                    click: ComplexEquipments.onUnlink
                 }],
                 title: i18n.Resources.Actions,
                 width: '165px'
@@ -323,6 +359,38 @@ var ComplexEquipments = {
             operator: "eq",
             value: parseInt(e.data.id)
         });
+
+        $('.' + reference).click(function (ev) {
+            ComplexEquipments.onResetPopup();
+            ComplexEquipments.controls.popupModel.set('model.id', e.data.id);
+            ComplexEquipments.controls.popupModel.set('reference', reference);
+
+            ComplexEquipments.onShowPopup();
+
+            return false;
+        });
+    },
+    onShowPopup: function (e) {
+        this.controls.popup.open()
+                           .center();
+    },
+    onClosePopup: function () {
+        this.controls.popup.close();
+    },
+    onLink: function (e) {
+        var model = ComplexEquipments.controls.popupModel.get('model');
+        var item = Datasources.complexEquipments.get(model.id);
+        item.set('equipments', model.equipments);
+        Datasources.complexEquipments.sync();
+        ComplexEquipments.onClosePopup();
+    },
+    onUnlink: function (e) {
+        e.preventDefault();
+        var tr = $(e.currentTarget).closest("tr");
+        var dataItem = this.dataItem(tr);
+        tr.remove();
+
+        Ajax.post('/admin/api/equipments/' + dataItem.id + '/unlink');
     },
     statusDDEditor: function (container, options) {
         $('<input required data-text-field="text" data-value-field="value"  data-value-primitive="true" data-bind="value:' + options.field + '"/>')
@@ -331,6 +399,15 @@ var ComplexEquipments = {
             autoBind: true,
             dataSource: Datasources.equipmentStatusTypes
         });
+    },
+    onResetPopup: function (e) {
+        this.controls.popupModel.set('model', this.getEmptyPopupModel());
+    },
+    getEmptyPopupModel: function () {
+        return {
+            id: null,
+            equipments: [],
+        };
     },
     getEmptyModel: function () {
         return {

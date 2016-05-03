@@ -9,6 +9,10 @@
     white-space: initial;
 }
 
+.k-dropdown .k-tooltip-validation.k-invalid-msg {
+   position: relative;
+}
+
 .k-edit-form-container {
     min-width: 460px;
 }
@@ -20,10 +24,19 @@
 .filters {
     padding: 10px 0px;
 }
-.panel-body .k-dropdown.k-header {
+.panel-body .k-dropdown.k-header, .k-autocomplete.k-state-default {
      background-color: transparent;
 }
 
 .grid-notes {
     width: 100px;
+}
+
+#ComplexEquipmentPopup {
+    width: 300px;
+    height: 100px;
+}
+
+#ComplexEquipmentPopup  .k-autocomplete{
+    width: 100%;
 }

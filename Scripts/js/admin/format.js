@@ -9,12 +9,12 @@
             return '<span class="k-grid-showText">' + item + '</span>';
         },
         anatomicalPosition: function (item) {
-            item = item != null ? Enums.AnatomicalPositionType.array[item].text : "";
+            item = item != null ? Enums.AnatomicalPositionType.array[item].text : i18n.Resources.None;
 
             return '<span class="k-grid-showText">' + item + '</span>';
         },
         anatomicalPositionImg: function (item) {
-            var text = item != null ? Enums.AnatomicalPositionType.array[item].text : ""
+            var text = item != null ? Enums.AnatomicalPositionType.array[item].text : '';
             return item ? '<img class="img-grid" src="/Content/img/body.png" alt="' + text + '" height="150px" />' : '&nbsp;';
         },
         prototype: function (item) {

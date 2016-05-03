@@ -59,6 +59,22 @@ var Equipments = {
         this.shipTypes.read();
 
         this.equipments = Equipments.getDatasource();
+
+        this.equipmentsLinkDD = new kendo.data.DataSource({
+            pageSize: KendoDS.pageSize,
+            serverPaging: true,
+            serverFiltering: true,
+            serverSorting: false,
+            transport: KendoDS.buildTransport('/admin/api/equipments'),
+            schema: {
+                data: "response",
+                total: "total",
+                errors: "Errors",
+                model: {
+                    id: "id"
+                }
+            }
+        });
     },
     getDatasource: function(){
         return new kendo.data.DataSource({
@@ -120,10 +136,9 @@ var Equipments = {
                             }
                         },
                         anatomicalPosition: {
-                            nullable: false,
+                            nullable: true,
                             type: "number",
                             validation: {
-                                required: true,
                                 min: 0,
                                 max: KendoDS.maxInt
                             }
@@ -215,11 +230,11 @@ var Equipments = {
                     pageSizes: [10, 50, 100]
                 },
                 columns: [{
-                    field: 'macAddress',
-                    title: i18n.Resources.MacAddress
-                }, {
                     field: 'serialNo',
                     title: i18n.Resources.SerialNo
+                }, {
+                    field: 'macAddress',
+                    title: i18n.Resources.MacAddress
                 }, {
                     field: 'status',
                     title: i18n.Resources.Status,
@@ -384,10 +399,11 @@ var Equipments = {
         });
     },
     anatomicalPositionDDEditor: function (container, options) {
-        $('<input required data-text-field="text" data-value-field="value"  data-value-primitive="true" data-bind="value:' + options.field + '"/>')
+        $('<input data-text-field="text" data-value-field="value"  data-value-primitive="true" data-bind="value:' + options.field + '"/>')
         .appendTo(container)
         .kendoDropDownList({
             autoBind: true,
+            optionLabel: i18n.Resources.SelectAnatomicalPosition,
             dataSource: Datasources.anatomicalPositionTypes
         });
     },

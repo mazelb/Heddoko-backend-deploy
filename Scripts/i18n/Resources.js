@@ -166,7 +166,13 @@ i18n.Resources = (function () {
   "ComplexEquipment": "Suit",
   "ComplexEquipments": "Suits",
   "EnterComplexEquipment": "Enter a MAC address, a physical location, or a serial #",
-  "Admin": "Admin"
+  "Admin": "Admin",
+  "Required": "required",
+  "Link": "Link",
+  "None": "None",
+  "Unlink": "Unlink",
+  "Save": "Save",
+  "SelectEquipment": "Select a equipments"
 };
 	return $.extend({}, i18n.Resources || {}, strings);
 }());

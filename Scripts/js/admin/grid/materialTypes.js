@@ -9,7 +9,7 @@ var MaterialTypes = {
         addModel: null
     },
     validators: {
-        modelValidator: null
+        addModel: null
     },
     datasources: function () {
         //Datasources context
@@ -60,8 +60,8 @@ var MaterialTypes = {
     },
     init: function () {
         var control = $("#gridMaterialTypes");
-        var filter = $('.matrialTypesFilter');
-        var model = $('.matrialTypesForm');
+        var filter = $('.materialTypesFilter');
+        var model = $('.materialTypesForm');
 
         if (control.length > 0) {
             this.controls.grid = control.kendoGrid({
