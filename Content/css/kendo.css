@@ -48,6 +48,48 @@ html, body {
   vertical-align: middle;
   margin-right: 10px; }
 
+.body-wrap {
+  position: relative; }
+  .body-wrap .body {
+    height: 150px;
+    opacity: 0.6; }
+  .body-wrap .body-circle {
+    border: 1.5px solid #3bd6b4;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-image: url("/Content/img/body.png"); }
+  .body-wrap .capsule-0 {
+    left: 17px;
+    top: 30px; }
+  .body-wrap .capsule-1 {
+    left: 96px;
+    top: 35px; }
+  .body-wrap .capsule-2 {
+    left: 101px;
+    top: 57px; }
+  .body-wrap .capsule-3 {
+    left: 64px;
+    top: 34px; }
+  .body-wrap .capsule-4 {
+    left: 65px;
+    top: 57px; }
+  .body-wrap .capsule-5 {
+    left: 6px;
+    top: 76px; }
+  .body-wrap .capsule-6 {
+    left: 9px;
+    top: 101px; }
+  .body-wrap .capsule-7 {
+    left: 33px;
+    top: 76px; }
+  .body-wrap .capsule-8 {
+    left: 34px;
+    top: 102px; }
+
 .margin010 {
   margin-top: 10px; }
 

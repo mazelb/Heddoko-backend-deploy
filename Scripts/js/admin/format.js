@@ -15,7 +15,16 @@
         },
         anatomicalPositionImg: function (item) {
             var text = item != null ? Enums.AnatomicalPositionType.array[item].text : '';
-            return item ? '<img class="img-grid" src="/Content/img/body.png" alt="' + text + '" height="150px" />' : '&nbsp;';
+            if (!item) {
+                return '&nbsp;'
+            }
+
+            var div = '<div class="body-wrap">';
+            div += '<img class="body" src="/Content/img/body.png" alt="' + text + '" title="' + text + '" height="150px" />';
+            div += '<div class="body-circle capsule-' + item + '"></div>';
+            div += ' </div>';
+
+            return div;
         },
         prototype: function (item) {
             item = item != null ? Enums.PrototypeType.array[item].text : "";
