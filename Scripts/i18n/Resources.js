@@ -142,7 +142,7 @@ i18n.Resources = (function () {
   "EnterEquipment": "Enter the serial # or location or mac address of an equipment",
   "Notes": "Notes",
   "Condition": "Condition",
-  "HeatsShrink": "Heats shrink",
+  "HeatsShrink": "Heatshrink good",
   "MacAddress": "MAC Address",
   "Numbers": "Numbers",
   "PhysicalLocation": "Physical location",
