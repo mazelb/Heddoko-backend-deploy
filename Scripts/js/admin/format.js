@@ -58,5 +58,62 @@
             div += "</div>";
             return div;
         }
+    },
+    organization: {
+        user: function (e) {
+            var div = '<div class="">'
+            div += i18n.Resources.Name + ': ' + e.user.name + '<br/>';
+            div += i18n.Resources.Email + ': ' + e.user.email + '<br/>';
+            div += "</div>";
+            return div;
+        }
+    },
+    notes: function (item) {
+        var text =  item ? item.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;').replace(/\n/g, '<br/>') : '';
+        var div = '<div class="grid-notes">'
+        div += text;
+        div += "</div>";
+        return div;
+    },
+    license: {
+        name: function(item) {
+            item = item != null ? item : "";
+
+            return '<span class="k-grid-showText">' + item + '</span>';
+        },
+        type: function (item) {
+            item = item != null ? Enums.LicenseType.array[item].text : "";
+
+            return '<span class="k-grid-showText">' + item + '</span>';
+        },
+        status: function (item) {
+            item = item != null ? Enums.LicenseStatusType.array[item].text : "";
+
+            return '<span class="k-grid-showText">' + item + '</span>';
+        },
+        used: function (item) {
+            item = item == null ? 0 : item;
+
+            return '<span class="k-grid-showText">' + item + '</span>';
+        },
+        expiredAt: function (item) {
+            item = kendo.toString(item, "yyyy-dd-MM");
+            return '<span class="k-grid-showText">' + item + '</span>';
+        }
+    },
+    user: {
+        name: function (first, last) {
+            return first + ' ' + last;
+        },
+        status: function (item) {
+            item = item != null ? Enums.UserStatusType.array[item].text : "";
+
+            return '<span class="k-grid-showText">' + item + '</span>';
+        },
+        role: function (item) {
+            item = item != null ? Enums.UserRoleType.array[item].text : "";
+
+            return '<span class="k-grid-showText">' + item + '</span>';
+        }
     }
 };

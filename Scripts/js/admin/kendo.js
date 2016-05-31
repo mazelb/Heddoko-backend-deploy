@@ -209,6 +209,13 @@ var KendoDS = {
     textAreaDDEditor: function (container, options) {
         $('<textarea data-bind="value: ' + options.field + '"></textarea>').appendTo(container);
     },
+    dateEditor: function (container, options) {
+        $('<input data-text-field="' + options.field + '" data-value-field="' + options.field + '" data-bind="value:' + options.field + '" data-format="' + options.format + '"/>')
+            .appendTo(container)
+            .kendoDatePicker({
+                autoBind: true
+            });
+    },
     onDataBound: function (e) {
         var grid = e.sender;
         if (grid.dataSource.total() == 0) {
