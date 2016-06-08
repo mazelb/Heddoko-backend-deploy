@@ -25,7 +25,12 @@ var Users = {
                 model: {
                     id: "id"
                 }
-            }
+            },
+            filter: [{
+                field: 'Admin',
+                operator: 'eq',
+                value: false
+            }]
         });
 
         this.userStatusTypes = new kendo.data.DataSource({

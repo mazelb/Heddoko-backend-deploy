@@ -38,8 +38,7 @@ var Licenses = {
                 field: 'Used',
                 operator: 'eq',
                 value: false
-            }
-            ]
+            }]
         });
     },
     getDatasource: function () {

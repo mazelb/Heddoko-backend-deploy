@@ -206,7 +206,10 @@ i18n.Resources = (function () {
   "EnterUser": "Enter the firstname or lastname or email of user",
   "Role": "Role",
   "EmailInviteUserSubject": "You invited to organization",
-  "EmptyLicense": "No license"
+  "EmptyLicense": "No license",
+  "Profile": "Profile",
+  "OldPassword": "Old password",
+  "ProfileSaveMessage": "You profile have been updated"
 };
 	return $.extend({}, i18n.Resources || {}, strings);
 }());
