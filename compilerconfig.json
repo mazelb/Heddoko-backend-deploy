@@ -1,0 +1,9 @@
+﻿[
+  {
+    "outputFile": "Content/css/kendo.css",
+    "inputFile": "Content/scss/kendo.scss",
+    "minify": {
+      "enabled": true
+    }
+  }
+]

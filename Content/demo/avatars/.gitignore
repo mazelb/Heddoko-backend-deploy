@@ -1,0 +1,5 @@
+# The avatars folder allows us to store team and athlete pictures to demo the app while it's still
+# being developed. Once the structure is solidified, we'll know where to store the avatars.
+
+*
+!.gitignore

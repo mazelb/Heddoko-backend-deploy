@@ -1,0 +1,64 @@
+﻿.body-wrap {
+    position: relative;
+
+    .body {
+        height: 150px;
+        opacity: 0.6;
+    }
+
+    .body-circle {
+        border: 1.5px solid $body_circle_color;
+        width: 20px;
+        height: 20px;
+        border-radius: 10px;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        background-image: url('/Content/img/body.png');
+    }
+
+    .capsule-0 {
+        left: 17px;
+        top: 30px;
+    }
+
+    .capsule-1 {
+        left: 96px;
+        top: 35px;
+    }
+
+    .capsule-2 {
+        left: 101px;
+        top: 57px;
+    }
+
+    .capsule-3 {
+        left: 64px;
+        top: 34px;
+    }
+
+    .capsule-4 {
+        left: 65px;
+        top: 57px;
+    }
+
+    .capsule-5 {
+        left: 6px;
+        top: 76px;
+    }
+
+    .capsule-6 {
+        left: 9px;
+        top: 101px;
+    }
+
+    .capsule-7 {
+        left: 33px;
+        top: 76px;
+    }
+
+    .capsule-8 {
+        left: 34px;
+        top: 102px;
+    }
+}
