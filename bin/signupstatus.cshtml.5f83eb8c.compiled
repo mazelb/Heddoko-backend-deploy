@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/Account/SignUpStatus.cshtml" hash="32422a0" filehash="23f09efe96fd" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Views_Account_SignUpStatus_cshtml">
+<preserve resultType="2" virtualPath="/Views/Account/SignUpStatus.cshtml" hash="32422a0" filehash="23e214162631" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Views_Account_SignUpStatus_cshtml">
   <filedeps>
     <filedep name="/Views/Account/SignUpStatus.cshtml" />
   </filedeps>

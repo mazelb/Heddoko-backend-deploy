@@ -19,7 +19,7 @@ var UsersAdmin = {
             this.controls.grid = control.kendoGrid({
                 dataSource: Datasources.users,
                 sortable: false,
-                editable: false,
+                editable: "popup",
                 selectable: false,
                 scrollable: false,
                 resizable: true,
@@ -30,13 +30,16 @@ var UsersAdmin = {
                 },
                 columns: [{
                     field: 'organizationName',
-                    title: i18n.Resources.Organization
+                    title: i18n.Resources.Organization,
+                    editor: KendoDS.emptyEditor
                 }, {
                     field: 'name',
-                    title: i18n.Resources.Name
+                    title: i18n.Resources.Name,
+                    editor: KendoDS.emptyEditor
                 }, {
                     field: 'phone',
-                    title: i18n.Resources.Phone
+                    title: i18n.Resources.Phone,
+                    editor: KendoDS.emptyEditor
                 }, {
                     field: 'username',
                     title: i18n.Resources.Username,
@@ -55,17 +58,25 @@ var UsersAdmin = {
                 }, {
                     field: 'licenseID',
                     title: i18n.Resources.License,
-                    editor: Licenses.ddEditor,
+                    editor: KendoDS.emptyEditor,
                     template: function (e) {
                         return Format.license.name(e.licenseName);
                     }
                 }, {
                     field: 'status',
                     title: i18n.Resources.Status,
-                    editor: KendoDS.emptyEditor,
+                    editor: Users.statusDDEditor,
                     template: function (e) {
                         return Format.user.status(e.status);
                     }
+                }, {
+                    command: [{
+                        name: "edit",
+                        text: i18n.Resources.Edit,
+                        className: "k-grid-edit"
+                    }],
+                    title: i18n.Resources.Actions,
+                    width: '165px'
                 }
                 ],
                 save: KendoDS.onSave,

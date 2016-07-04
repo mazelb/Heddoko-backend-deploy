@@ -3,6 +3,7 @@
 });
 
 var Organizations = {
+    isDeleted: false,
     controls: {
         grid: null,
         filterModel: null,
@@ -94,6 +95,9 @@ var Organizations = {
                     refresh: true,
                     pageSizes: [10, 50, 100]
                 },
+                toolbar: [{
+                    template: '<div class="grid-checkbox"><span><input id="chk-show-deleted" type="checkbox"/>' + i18n.Resources.ShowDeleted + '</span></div>'
+                }],
                 columns: [{
                     field: 'name',
                     title: i18n.Resources.Name
@@ -135,6 +139,10 @@ var Organizations = {
                         name: "destroy",
                         text: i18n.Resources.Delete,
                         className: "k-grid-delete"
+                    }, {
+                        text: i18n.Resources.Restore,
+                        className: "k-grid-restore",
+                        click: this.onRestore
                     }],
                     title: i18n.Resources.Actions,
                     width: '165px'
@@ -142,7 +150,7 @@ var Organizations = {
                 ],
                 save: KendoDS.onSave,
                 detailInit: this.detailInit,
-                dataBound: KendoDS.onDataBound
+                dataBound: this.onDataBound
             }).data("kendoGrid");
 
             KendoDS.bind(this.controls.grid, true);
@@ -166,12 +174,15 @@ var Organizations = {
             this.validators.addModel = model.kendoValidator({
                 validateOnBlur: true,
                 rules: {
+                    maxLengthValidationEmail: Validator.organization.email.maxLengthValidation,
                     maxLengthValidationName: Validator.organization.name.maxLengthValidation,
                     maxLengthValidationPhone: Validator.organization.phone.maxLengthValidation,
                     maxLengthValidationAddress: Validator.organization.address.maxLengthValidation,
                     maxLengthValidationNotes: Validator.organization.notes.maxLengthValidation
                 }
             }).data("kendoValidator");
+
+            $('#chk-show-deleted').click(this.onShowDeleted.bind(this));
         }
     },
     detailInit: function (e) {
@@ -274,6 +285,42 @@ var Organizations = {
             }
         };
     },
+    onDataBound: function(e) {
+        KendoDS.onDataBound(e);
+
+        $(".k-grid-delete").each(function () {
+            var currentDataItem = Organizations.controls.grid.dataItem($(this).closest("tr"));
+
+            if (currentDataItem.status == Enums.OrganizationStatusType.enum.Deleted) {
+                $(this).remove();
+            }
+        });
+
+        $(".k-grid-edit").each(function () {
+            var currentDataItem = Organizations.controls.grid.dataItem($(this).closest("tr"));
+
+            if (currentDataItem.status == Enums.OrganizationStatusType.enum.Deleted) {
+                $(this).remove();
+            }
+        });
+
+        $(".k-grid-restore").each(function () {
+            var currentDataItem = Organizations.controls.grid.dataItem($(this).closest("tr"));
+
+            if (currentDataItem.status == Enums.OrganizationStatusType.enum.Active) {
+                $(this).remove();
+            }
+        });
+    },
+    onShowDeleted: function (e) {
+        this.isDeleted = $(e.currentTarget).prop('checked');
+        this.onFilter();
+    },
+    onRestore: function(e) {
+        var item = Organizations.controls.grid.dataItem($(e.currentTarget).closest("tr"));
+        item.set('status', Enums.OrganizationStatusType.enum.Active);
+        Organizations.controls.grid.dataSource.sync();
+    },
     onReset: function (e) {
         this.controls.addModel.set('model', this.getEmptyModel());
     },
@@ -294,7 +341,7 @@ var Organizations = {
         }
     },
     onEnter: function (e) {
-        if (e.keyCode == kendo.keys.ENTER) {
+        if (e.keyCode === kendo.keys.ENTER) {
             this.onFilter(e);
         }
     },
@@ -320,7 +367,15 @@ var Organizations = {
             });
         }
 
-        return filters.length == 0 ? {} : filters;
+        if (this.isDeleted) {
+            filters.push({
+                field: "IsDeleted",
+                operator: "eq",
+                value: true
+            });
+        }
+
+        return filters.length === 0 ? {} : filters;
     }
 };
 

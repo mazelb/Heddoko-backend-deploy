@@ -3,6 +3,7 @@
 });
 
 var Users = {
+    isDeleted: false,
     controls: {
         grid: null,
         filterModel: null,
@@ -34,7 +35,7 @@ var Users = {
         });
 
         this.userStatusTypes = new kendo.data.DataSource({
-            data: _.values(Enums.UserStatusType.array)
+            data: _.values(_.filter(Enums.UserStatusType.array, function (u) { return u.value != Enums.UserStatusType.enum.Banned && u.value != Enums.UserStatusType.enum.Deleted }))
         });
 
         this.users = Users.getDatasource();
@@ -141,6 +142,9 @@ var Users = {
                     refresh: true,
                     pageSizes: [10, 50, 100]
                 },
+                toolbar: [{
+                    template: '<div class="grid-checkbox"><span><input id="chk-show-deleted" type="checkbox"/>' + i18n.Resources.ShowDeleted + '</span></div>'
+                }],
                 columns: [{
                     field: 'name',
                     title: i18n.Resources.Name,
@@ -174,7 +178,7 @@ var Users = {
                 }, {
                     field: 'status',
                     title: i18n.Resources.Status,
-                    editor: KendoDS.emptyEditor,
+                    editor: Users.statusDDEditor,
                     template: function (e) {
                         return Format.user.status(e.status);
                     }
@@ -187,6 +191,10 @@ var Users = {
                         name: "destroy",
                         text: i18n.Resources.Delete,
                         className: "k-grid-delete"
+                    }, {
+                        text: i18n.Resources.Restore,
+                        className: "k-grid-restore",
+                        click: this.onRestore
                     }],
                     title: i18n.Resources.Actions,
                     width: '165px'
@@ -194,7 +202,7 @@ var Users = {
                 ],
                 save: KendoDS.onSave,
                 detailInit: this.detailInit,
-                dataBound: KendoDS.onDataBound
+                dataBound: this.onDataBound
             }).data("kendoGrid");
 
             KendoDS.bind(this.controls.grid, true);
@@ -224,7 +232,45 @@ var Users = {
                     maxLengthValidationNotes: Validator.organization.notes.maxLengthValidation
                 }
             }).data("kendoValidator");
+
+            $('#chk-show-deleted').click(this.onShowDeleted.bind(this));
         }
+    },
+    onDataBound: function (e) {
+        KendoDS.onDataBound(e);
+
+        $(".k-grid-delete").each(function () {
+            var currentDataItem = Users.controls.grid.dataItem($(this).closest("tr"));
+
+            if (currentDataItem.status == Enums.UserStatusType.enum.Deleted) {
+                $(this).remove();
+            }
+        });
+
+        $(".k-grid-edit").each(function () {
+            var currentDataItem = Users.controls.grid.dataItem($(this).closest("tr"));
+
+            if (currentDataItem.status == Enums.UserStatusType.enum.Deleted) {
+                $(this).remove();
+            }
+        });
+
+        $(".k-grid-restore").each(function () {
+            var currentDataItem = Users.controls.grid.dataItem($(this).closest("tr"));
+
+            if (currentDataItem.status != Enums.UserStatusType.enum.Deleted) {
+                $(this).remove();
+            }
+        });
+    },
+    onShowDeleted: function (e) {
+        this.isDeleted = $(e.currentTarget).prop('checked');
+        this.onFilter();
+    },
+    onRestore: function (e) {
+        var item = Users.controls.grid.dataItem($(e.currentTarget).closest("tr"));
+        item.set('status', Enums.UserStatusType.enum.Active);
+        Users.controls.grid.dataSource.sync();
     },
     statusDDEditor: function (container, options) {
         $('<input required data-text-field="text" data-value-field="value"  data-value-primitive="true" data-bind="value:' + options.field + '"/>')
@@ -285,6 +331,14 @@ var Users = {
                 field: "Search",
                 operator: "eq",
                 value: search
+            });
+        }
+
+        if (this.isDeleted) {
+            filters.push({
+                field: "IsDeleted",
+                operator: "eq",
+                value: true
             });
         }
 
