@@ -64,10 +64,35 @@
                 return Validator.maxLengthValidation(input, 'phone', Validator.organization.phone.maxSize);
             }
         },
+        email: {
+            maxSize: 255,
+            maxLengthValidation: function (input) {
+                return Validator.maxLengthValidation(input, 'email', Validator.organization.email.maxSize);
+            }
+        },
         name: {
             maxSize: 255,
             maxLengthValidation: function (input) {
                 return Validator.maxLengthValidation(input, 'name', Validator.organization.name.maxSize);
+            }
+        }
+    },
+    license: {
+        expirationAt: {
+            expirationAtValidation: function (input) {
+                if (!input.is('[name="expirationAt"]')) {
+                    return true;
+                }
+
+                input.attr("data-expirationAtValidation-msg", i18n.Resources.WrongExpirationAtDate);
+
+                var val = input.val();
+                var result = KendoDS.validateDate(val)
+                if (result) {
+                    return result >= kendo.date.today();
+                } 
+
+                return false;
             }
         }
     },

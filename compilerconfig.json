@@ -5,5 +5,12 @@
     "minify": {
       "enabled": true
     }
+  },
+  {
+    "outputFile": "Content/css/general.css",
+    "inputFile": "Content/scss/general.scss",
+    "minify": {
+      "enabled": true
+    }
   }
 ]

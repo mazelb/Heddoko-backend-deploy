@@ -125,3 +125,10 @@ html, body {
 #ComplexEquipmentPopup .k-autocomplete {
   width: 100%; }
 
+.grid-checkbox {
+  margin-left: 10px; }
+  .grid-checkbox input {
+    margin-right: 5px;
+    margin-top: -1px;
+    vertical-align: middle; }
+

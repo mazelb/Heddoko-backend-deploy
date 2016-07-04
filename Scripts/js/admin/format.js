@@ -64,6 +64,7 @@
             var div = '<div class="">'
             div += i18n.Resources.Name + ': ' + e.user.name + '<br/>';
             div += i18n.Resources.Email + ': ' + e.user.email + '<br/>';
+            div += i18n.Resources.Username + ': ' + e.user.username + '<br/>';
             div += "</div>";
             return div;
         }

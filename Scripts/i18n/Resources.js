@@ -209,7 +209,14 @@ i18n.Resources = (function () {
   "EmptyLicense": "No license",
   "Profile": "Profile",
   "OldPassword": "Old password",
-  "ProfileSaveMessage": "You profile have been updated"
+  "ProfileSaveMessage": "You profile have been updated",
+  "WrongLicenseActive": "License is not active",
+  "WrongLicenseDeleted": "License is removed",
+  "WrongLicenseExpiration": "License is expired",
+  "WrongExpirationAtDate": "Expiration date should be more than today",
+  "Restore": "Restore",
+  "ShowDeleted": "Show deleted",
+  "WrongLicenseAdmin": "Admin can't be a license admin"
 };
 	return $.extend({}, i18n.Resources || {}, strings);
 }());
