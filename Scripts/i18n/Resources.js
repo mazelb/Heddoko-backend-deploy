@@ -216,7 +216,23 @@ i18n.Resources = (function () {
   "WrongExpirationAtDate": "Expiration date should be more than today",
   "Restore": "Restore",
   "ShowDeleted": "Show deleted",
-  "WrongLicenseAdmin": "Admin can't be a license admin"
+  "WrongLicenseAdmin": "Admin can't be a license admin",
+  "Attachments": "Attachments",
+  "DetailedDescription": "Detailed Description",
+  "FullName": "Full name",
+  "Importance": "Issue Importance",
+  "IssueImportance_High": "Show stopper",
+  "IssueImportance_Low": "Can live with it now",
+  "IssueImportance_Medium": "Doesn't prevent me from working",
+  "IssueType": "Issue type",
+  "IssueType_Hardware": "Hardware Issue",
+  "IssueType_NewFeature": "New Feature Request",
+  "IssueType_Software": "Software Issue",
+  "Send": "Send",
+  "ShortDescription": "Short Description",
+  "Support": "Support",
+  "SupportSent": "We have sent an email with your support request. Soon we will contact with you.",
+  "WrongAttachmentSize": "Total size can't be more than 20 mb."
 };
 	return $.extend({}, i18n.Resources || {}, strings);
 }());
