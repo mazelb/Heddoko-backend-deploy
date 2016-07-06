@@ -42,12 +42,32 @@ var Licenses = {
         });
     },
     getDatasource: function () {
+
+        var licensesTransport = $.extend(true, {}, KendoDS.buildTransport('/admin/api/licenses'), {
+            parameterMap: function (options, type) {
+                switch (type) {
+                    case 'read':
+                    case 'destroy':
+                        return options;
+                    case 'create':
+                    case 'update':
+                        if (options.expirationAt) {
+                            options.expirationAt = kendo.toString(options.expirationAt, "yyyy/MM/dd")
+                        }
+                        if (options.models) {
+                            return kendo.stringify(options.models);
+                        }
+                        return kendo.stringify(options);
+                }
+            }
+        });
+
         return new kendo.data.DataSource({
             pageSize: KendoDS.pageSize,
             serverPaging: true,
             serverFiltering: true,
             serverSorting: false,
-            transport: KendoDS.buildTransport('/admin/api/licenses'),
+            transport: licensesTransport,
             schema: {
                 data: "response",
                 total: "total",
