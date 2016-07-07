@@ -2,6 +2,30 @@
   float: none;
   margin: 0 auto; }
 
+.red {
+  cursor: pointer;
+  color: #9d2a27; }
+
+.yellow {
+  cursor: pointer;
+  color: yellow; }
+
+.green {
+  cursor: pointer;
+  color: #759632; }
+
+.black {
+  cursor: pointer;
+  color: black; }
+
+.orange {
+  cursor: pointer;
+  color: #ffc000; }
+
+.brown {
+  cursor: pointer;
+  color: #c36518; }
+
 .web-layout a.login {
   color: #3bd6b2;
   display: inline-block;

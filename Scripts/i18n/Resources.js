@@ -232,7 +232,14 @@ i18n.Resources = (function () {
   "ShortDescription": "Short Description",
   "Support": "Support",
   "SupportSent": "We have sent an email with your support request. Soon we will contact with you.",
-  "WrongAttachmentSize": "Total size can't be more than 20 mb."
+  "WrongAttachmentSize": "Total size can't be more than 20 mb.",
+  "All": "All",
+  "ExpiredSoon": "License will be expired soon",
+  "LicenseStatusType_Active": "Active",
+  "LicenseStatusType_Deleted": "Deleted",
+  "LicenseStatusType_Expired": "Expired",
+  "LicenseStatusType_Inactive": "Inactive",
+  "ShowByLicenses": "Show users by license"
 };
 	return $.extend({}, i18n.Resources || {}, strings);
 }());

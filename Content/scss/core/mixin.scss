@@ -99,3 +99,7 @@
 @mixin margin-top-10() {
     margin-top: 10px;
 }
+
+@mixin pointer() {
+    cursor: pointer;
+}

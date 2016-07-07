@@ -173,7 +173,14 @@ var Users = {
                     title: i18n.Resources.License,
                     editor: Licenses.ddEditor,
                     template: function (e) {
-                        return Format.license.name(e.licenseName);
+                        var name = '';
+                        if (e.licenseName) {
+                            name = Format.license.status(e.licenseStatus, e.expirationAt, true);
+                        }
+
+                        name += ' ' + Format.license.name(e.licenseName);;
+
+                        return name;
                     }
                 }, {
                     field: 'status',
@@ -207,10 +214,15 @@ var Users = {
 
             KendoDS.bind(this.controls.grid, true);
 
+            var licenses = Licenses.getDatasource();
+
             this.controls.filterModel = kendo.observable({
                 find: this.onFilter.bind(this),
                 search: null,
-                keyup: this.onEnter.bind(this)
+                keyup: this.onEnter.bind(this),
+                license: null,
+                licenses: licenses,
+                click: this.onFilter.bind(this)
             });
 
             kendo.bind(filter, this.controls.filterModel);
@@ -233,33 +245,36 @@ var Users = {
                 }
             }).data("kendoValidator");
 
-            $('#chk-show-deleted').click(this.onShowDeleted.bind(this));
+            $('#chk-show-deleted', Users.controls.grid.element).click(this.onShowDeleted.bind(this));
         }
     },
     onDataBound: function (e) {
         KendoDS.onDataBound(e);
 
-        $(".k-grid-delete").each(function () {
+        $(".k-grid-delete", Users.controls.grid.element).each(function () {
             var currentDataItem = Users.controls.grid.dataItem($(this).closest("tr"));
-
-            if (currentDataItem.status == Enums.UserStatusType.enum.Deleted) {
-                $(this).remove();
+            if (currentDataItem) {
+                if (currentDataItem.status == Enums.UserStatusType.enum.Deleted) {
+                    $(this).remove();
+                }
             }
         });
 
-        $(".k-grid-edit").each(function () {
+        $(".k-grid-edit", Users.controls.grid.element).each(function () {
             var currentDataItem = Users.controls.grid.dataItem($(this).closest("tr"));
-
-            if (currentDataItem.status == Enums.UserStatusType.enum.Deleted) {
-                $(this).remove();
+            if (currentDataItem) {
+                if (currentDataItem.status == Enums.UserStatusType.enum.Deleted) {
+                    $(this).remove();
+                }
             }
         });
 
-        $(".k-grid-restore").each(function () {
+        $(".k-grid-restore", Users.controls.grid.element).each(function () {
             var currentDataItem = Users.controls.grid.dataItem($(this).closest("tr"));
-
-            if (currentDataItem.status != Enums.UserStatusType.enum.Deleted) {
-                $(this).remove();
+            if (currentDataItem) {
+                if (currentDataItem.status != Enums.UserStatusType.enum.Deleted) {
+                    $(this).remove();
+                }
             }
         });
     },
@@ -321,6 +336,7 @@ var Users = {
     buildFilter: function (search) {
         Notifications.clear();
         var search = this.controls.filterModel.search;
+        var license = this.controls.filterModel.license;
 
         var filters = [];
 
@@ -331,6 +347,16 @@ var Users = {
                 field: "Search",
                 operator: "eq",
                 value: search
+            });
+        }
+
+        if (typeof (license) !== "undefined"
+          && license !== ""
+          && license !== null) {
+            filters.push({
+                field: "License",
+                operator: "eq",
+                value: license
             });
         }
 

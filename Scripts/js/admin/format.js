@@ -52,7 +52,7 @@
             return '<span class="k-grid-showText">' + item + '</span>';
         },
         notes: function (item) {
-            var text =  item ? item.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;').replace(/\n/g, '<br/>') : '';
+            var text = item ? item.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;').replace(/\n/g, '<br/>') : '';
             var div = '<div class="grid-notes">'
             div += text;
             div += "</div>";
@@ -62,22 +62,22 @@
     organization: {
         user: function (e) {
             var div = '<div class="">'
-            div += i18n.Resources.Name + ': ' + e.user.name + '<br/>';
-            div += i18n.Resources.Email + ': ' + e.user.email + '<br/>';
-            div += i18n.Resources.Username + ': ' + e.user.username + '<br/>';
+            div += i18n.Resources.Name + ': <b>' + e.user.name + '</b><br/>';
+            div += i18n.Resources.Email + ': <b>' + e.user.email + '</b><br/>';
+            div += i18n.Resources.Username + ': <b>' + e.user.username + '</b><br/>';
             div += "</div>";
             return div;
         }
     },
     notes: function (item) {
-        var text =  item ? item.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;').replace(/\n/g, '<br/>') : '';
+        var text = item ? item.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;').replace(/\n/g, '<br/>') : '';
         var div = '<div class="grid-notes">'
         div += text;
         div += "</div>";
         return div;
     },
     license: {
-        name: function(item) {
+        name: function (item) {
             item = item != null ? item : "";
 
             return '<span class="k-grid-showText">' + item + '</span>';
@@ -87,10 +87,26 @@
 
             return '<span class="k-grid-showText">' + item + '</span>';
         },
-        status: function (item) {
+        status: function (item, date, skip) {
+
+            var now = new Date();
+            var diff = Math.round((date - now) / 1000 / 60 / 60 / 24);
+
+            var warning = '';
+            if (item == Enums.LicenseStatusType.enum.Active
+             && diff > 0
+             && diff < 10) {
+                warning = this.iconStatus();
+            }
+
+            var icon = this.iconStatus(item);
             item = item != null ? Enums.LicenseStatusType.array[item].text : "";
 
-            return '<span class="k-grid-showText">' + item + '</span>';
+            if (skip) {
+                item = '';
+            }
+
+            return '<span class="k-grid-showText">' + icon + ' ' + item + ' ' + warning + '</span>';
         },
         used: function (item) {
             item = item == null ? 0 : item;
@@ -100,7 +116,21 @@
         expiredAt: function (item) {
             item = kendo.toString(item, "yyyy-dd-MM");
             return '<span class="k-grid-showText">' + item + '</span>';
-        }
+        },
+        iconStatus: function (status) {
+            switch (status) {
+                case Enums.LicenseStatusType.enum.Active:
+                    return '<i class="green status glyphicon glyphicon-ok-circle" title="' + i18n.Resources.LicenseStatusType_Active + '"></i>';
+                case Enums.LicenseStatusType.enum.Deleted:
+                    return '<i class="red status glyphicon glyphicon-remove-circle" title="' + i18n.Resources.LicenseStatusType_Active + '"></i>';
+                case Enums.LicenseStatusType.enum.Expired:
+                    return '<i class="orange status glyphicon glyphicon-exclamation-sign" title="' + i18n.Resources.LicenseStatusType_Active + '"></i>';
+                case Enums.LicenseStatusType.enum.Inactive:
+                    return '<i class="orange status glyphicon glyphicon-ban-circle" title="' + i18n.Resources.LicenseStatusType_Active + '"></i>';
+                default:
+                    return '<i class="brown status glyphicon glyphicon-bullhorn" title="' + i18n.Resources.ExpiredSoon + '"></i>';
+            }
+        },
     },
     user: {
         name: function (first, last) {
