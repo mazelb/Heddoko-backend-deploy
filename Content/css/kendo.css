@@ -2,6 +2,30 @@
   float: none;
   margin: 0 auto; }
 
+.red {
+  cursor: pointer;
+  color: #9d2a27; }
+
+.yellow {
+  cursor: pointer;
+  color: yellow; }
+
+.green {
+  cursor: pointer;
+  color: #759632; }
+
+.black {
+  cursor: pointer;
+  color: black; }
+
+.orange {
+  cursor: pointer;
+  color: #ffc000; }
+
+.brown {
+  cursor: pointer;
+  color: #c36518; }
+
 html, body {
   font-family: "arial"; }
 
@@ -126,9 +150,13 @@ html, body {
   width: 100%; }
 
 .grid-checkbox {
-  margin-left: 10px; }
+  margin-left: 10px;
+  margin-right: 10px; }
   .grid-checkbox input {
     margin-right: 5px;
     margin-top: -1px;
     vertical-align: middle; }
+
+#userLicensesDD {
+  width: 200px; }
 

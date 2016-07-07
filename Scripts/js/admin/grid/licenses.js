@@ -179,7 +179,7 @@ var Licenses = {
                         field: 'status',
                         title: i18n.Resources.Status,
                         template: function (ed) {
-                            return Format.license.status(ed.status);
+                            return Format.license.status(ed.status, ed.expirationAt);
                         },
                         editor: Licenses.statusDDEditor
                     }, {

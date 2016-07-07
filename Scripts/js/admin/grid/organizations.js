@@ -182,7 +182,7 @@ var Organizations = {
                 }
             }).data("kendoValidator");
 
-            $('#chk-show-deleted').click(this.onShowDeleted.bind(this));
+            $('#chk-show-deleted', Organizations.controls.grid.element).click(this.onShowDeleted.bind(this));
         }
     },
     detailInit: function (e) {
@@ -224,7 +224,7 @@ var Organizations = {
                     field: 'status',
                     title: i18n.Resources.Status,
                     template: function (ed) {
-                        return Format.license.status(ed.status);
+                        return Format.license.status(ed.status, ed.expirationAt);
                     },
                     editor: Licenses.statusDDEditor
                 }, {
@@ -288,7 +288,7 @@ var Organizations = {
     onDataBound: function(e) {
         KendoDS.onDataBound(e);
 
-        $(".k-grid-delete").each(function () {
+        $(".k-grid-delete", Organizations.controls.grid.element).each(function () {
             var currentDataItem = Organizations.controls.grid.dataItem($(this).closest("tr"));
 
             if (currentDataItem.status == Enums.OrganizationStatusType.enum.Deleted) {
@@ -296,21 +296,22 @@ var Organizations = {
             }
         });
 
-        $(".k-grid-edit").each(function () {
+        $(".k-grid-edit", Organizations.controls.grid.element).each(function () {
             var currentDataItem = Organizations.controls.grid.dataItem($(this).closest("tr"));
-
+           
             if (currentDataItem.status == Enums.OrganizationStatusType.enum.Deleted) {
                 $(this).remove();
             }
         });
 
-        $(".k-grid-restore").each(function () {
+        $(".k-grid-restore", Organizations.controls.grid.element).each(function () {
             var currentDataItem = Organizations.controls.grid.dataItem($(this).closest("tr"));
 
             if (currentDataItem.status == Enums.OrganizationStatusType.enum.Active) {
                 $(this).remove();
             }
         });
+
     },
     onShowDeleted: function (e) {
         this.isDeleted = $(e.currentTarget).prop('checked');
