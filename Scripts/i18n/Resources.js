@@ -239,7 +239,8 @@ i18n.Resources = (function () {
   "LicenseStatusType_Deleted": "Deleted",
   "LicenseStatusType_Expired": "Expired",
   "LicenseStatusType_Inactive": "Inactive",
-  "ShowByLicenses": "Show users by license"
+  "ShowByLicenses": "Show users by license",
+  "Inventory": "Inventory"
 };
 	return $.extend({}, i18n.Resources || {}, strings);
 }());
