@@ -1,0 +1,16 @@
+﻿html.landing-page {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        height: 100%;
+        background: rgba(0, 0, 0, 0) url("/Content/images/bg_home.jpg") no-repeat fixed center center / cover ;
+
+    body {
+        background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+        width: 100%;
+        font-family: "Roboto",Helvetica,Arial,sans-serif;
+        margin: 0;
+    }
+
+    body, label, .checkbox label {
+        font-weight: 300;
+    }
+}

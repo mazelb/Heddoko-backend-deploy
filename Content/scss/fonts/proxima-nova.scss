@@ -1,0 +1,55 @@
+﻿
+
+@font-face {
+    font-family: 'Proxima Nova';
+    font-style: normal;
+    font-weight: 400;
+    src: url(../fonts/ProximaNova-Regular.eot);
+    src: local('Proxima Nova Regular'), local('ProximaNova-Regular'),
+        url(../fonts/ProximaNova-Regular.eot?#iefix) format('embedded-opentype'),
+        // url(../fonts/ProximaNova-Regular.woff2) format('woff2'),
+        url(../fonts/ProximaNova-Regular.woff) format('woff'),
+        url(../fonts/ProximaNova-Regular.ttf) format('truetype'),
+        url(../fonts/ProximaNova-Regular.svg) format('svg');
+}
+
+@font-face {
+    font-family: 'Proxima Nova Light';
+    font-style: normal;
+    font-weight: 300;
+    src: url(../fonts/ProximaNova-Light.eot);
+    src: local('Proxima Nova Light'), local('ProximaNova-Light'),
+        url(../fonts/ProximaNova-Light.eot?#iefix) format('embedded-opentype'),
+        // url(../fonts/ProximaNova-Light.woff2) format('woff2'),
+        url(../fonts/ProximaNova-Light.woff) format('woff'),
+        url(../fonts/ProximaNova-Light.ttf) format('truetype'),
+        url(../fonts/ProximaNova-Light.svg) format('svg');
+}
+
+@font-face {
+    font-family: 'Proxima Nova Bold';
+    font-style: normal;
+    font-weight: 700;
+    src: url(../fonts/ProximaNova-Bold.eot);
+    src: local('Proxima Nova Bold'), local('ProximaNova-Bold'),
+        url(../fonts/ProximaNova-Bold.eot?#iefix) format('embedded-opentype'),
+        url(../fonts/ProximaNova-Bold.woff2) format('woff2'),
+        url(../fonts/ProximaNova-Bold.woff) format('woff'),
+        url(../fonts/ProximaNova-Bold.ttf) format('truetype'),
+        url(../fonts/ProximaNova-Bold.svg#proxima_novabold) format('svg')
+        ;
+}
+
+@font-face {
+    font-family: 'Proxima Nova Condensed';
+    font-style: normal;
+    font-weight: normal;
+    src: url(../fonts/ProximaNovaCond-Regular.eot);
+    src: local('Proxima Nova Condensed'), local('ProximaNova-Condensed'),
+        url(../fonts/ProximaNovaCond-Regular.eot?#iefix) format('embedded-opentype'),
+        url(../fonts/ProximaNovaCond-Regular.woff2) format('woff2'),
+        url(../fonts/ProximaNovaCond-Regular.woff) format('woff'),
+        url(../fonts/ProximaNovaCond-Regular.ttf) format('truetype'),
+        url(../fonts/ProximaNovaCond-Regular.svg#proxima_nova_cn_rgregular) format('svg')
+        ;
+}

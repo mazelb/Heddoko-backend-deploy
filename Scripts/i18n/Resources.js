@@ -240,7 +240,18 @@ i18n.Resources = (function () {
   "LicenseStatusType_Expired": "Expired",
   "LicenseStatusType_Inactive": "Inactive",
   "ShowByLicenses": "Show users by license",
-  "Inventory": "Inventory"
+  "Size": "Size",
+  "QAStatus": "QA Status",
+  "PantsOctopi": "Pants Octopi",
+  "Inventory": "Inventory",
+  "GoodAfternoon": "Good Afternoon",
+  "GoodEvening": "Good Evening",
+  "GoodMorning": "Good Morning",
+  "WhatWouldYouLikeToDO": "What would you like to do?",
+  "Manage": "Manage",
+  "EnterPantsOctopi": "Enter pants octopi id or size",
+  "SelectQAStatus": "Select QA status",
+  "SelectSize": "Select size"
 };
 	return $.extend({}, i18n.Resources || {}, strings);
 }());

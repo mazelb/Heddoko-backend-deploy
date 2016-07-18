@@ -1,0 +1,339 @@
+﻿.landing-page {
+    header {
+        background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+        height: 56px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 40px;
+        width: 1280px;
+
+        .nav-logo {
+            display: block;
+            float: left;
+            padding-left: 10px;
+            padding-top: 10px;
+            width: 300px;
+
+            img {
+                display: block;
+                height: auto;
+                width: 100%;
+            }
+        }
+
+        .social {
+            float: right;
+            margin-bottom: 10px;
+            margin-top: 10px;
+
+            p > a {
+                color: $header_a_color;
+                margin: 0 10px;
+            }
+        }
+    }
+
+    header.top {
+        width: 90% !important;
+        margin: 40px 5% 0 !important;
+    }
+}
+
+.web-page  {
+    .top-header {
+        z-index: 10;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 80px;
+        background-color: transparent;
+ 
+        .clearfix {
+            position: relative;
+        }
+
+        .top-nav {
+            width: 100%;
+            padding: 0px;
+        }
+   
+        .top-nav {
+            .nav-left, .nav-right {
+                font-size: 18px;
+                line-height: 22px;
+                margin-top: 15px;
+
+                a {
+                    display: block;
+                    text-align: center;
+
+                    span {
+                        display: block;
+                        margin: 7px 0 0;
+                    }
+                }
+            }
+
+            .nav-left {
+            }
+
+            .nav-right {
+                margin-right: 20px;
+            }
+        }
+
+        .menu-button {
+            padding: 14px 15px;
+            margin-left: 20px;
+            padding-top: 18px;
+        }
+
+        .menu-button:hover {
+            cursor: pointer;
+            background-color: transparent;
+        }
+
+        .menu-button .icon-bar {
+            display: block;
+            width: 17px;
+            height: 3px;
+            @include border-radius(1px);
+            background-color: $orange;
+        }
+
+        .menu-button .icon-bar + .icon-bar {
+            margin-top: 3px;
+        }
+
+        .dropdown-menu.panel {
+            padding: 0;
+            white-space: nowrap;
+            @include box-shadow(0 3px 9px rgba(0, 0, 0, 0.5));
+        }
+
+        .dropdown-menu.panel .panel-heading {
+            background: #ffffff;
+        }
+
+        .dropdown-menu.panel .panel-heading,
+        .dropdown-menu.panel .panel-footer {
+            padding: 10px 15px;
+        }
+
+        .dropdown-menu.panel .list-group-item {
+            padding: 10px 15px;
+        }
+
+        .dropdown-menu.panel .list-group-item > a {
+            display: block;
+        }
+
+        .dropdown-menu.panel .media .media-body {
+            padding-right: 75px;
+        }
+    }
+
+
+    .top-header a:hover {
+        text-decoration: none;
+    }
+
+    .top-header .hidden-mobile {
+        display: none;
+    }
+
+    @media (min-width: 480px) {
+        .top-header .hidden-mobile {
+            display: inline;
+        }
+    }
+
+    @media (min-width: 768px) {
+        .top-header .menu-button {
+            display: none;
+        }
+    }
+
+    @media (min-width: 768px) {
+        .top-header .top-nav {
+            padding: 0 0 0 270px;
+        }
+
+        .nav-min .top-header .top-nav {
+            padding: 0 0 0 60px;
+        }
+    }
+
+    @media (min-width: 768px) {
+        .top-header .search-input {
+            width: 350px;
+        }
+    }
+
+    .top-header .top-nav .nav-right-button {
+        font-size: 18px;
+        line-height: 22px;
+        margin-right: 20px;
+        margin-top: 15px;
+    }
+
+    .top-header .top-nav .nav-left > li,
+    .top-header .top-nav .nav-right > li {
+        float: left;
+    }
+
+    .top-header .top-nav .nav-left > li.nav-profile > a,
+    .top-header .top-nav .nav-right > li.nav-profile > a {
+        padding: 10px 15px;
+    }
+
+    .top-header .top-nav .nav-left > li.nav-profile .hidden-xs,
+    .top-header .top-nav .nav-right > li.nav-profile .hidden-xs {
+        padding-right: 8px;
+    }
+
+    .top-header .top-nav .nav-left > li.nav-profile i,
+    .top-header .top-nav .nav-right > li.nav-profile i {
+        width: 18px;
+        font-size: 16px;
+        margin-right: 5px;
+    }
+
+    .top-header .top-nav .nav-left > li > .toggle-min,
+    .top-header .top-nav .nav-right > li > .toggle-min {
+        display: none;
+        margin-left: 20px;
+    }
+
+    @media (min-width: 768px) {
+        .top-header .top-nav .nav-left > li > .toggle-min,
+        .top-header .top-nav .nav-right > li > .toggle-min {
+            display: block;
+        }
+    }
+
+    @media (max-width:350px) {
+        .top-header .top-nav .nav-right {
+            margin-left: 0;
+        }
+
+        .top-header .menu-button {
+            margin-left: 10px;
+        }
+
+        .top-header .top-nav .nav-left > li.nav-profile > a,
+        .top-header .top-nav .nav-right > li.nav-profile > a {
+            padding: 10px 5px;
+        }
+    }
+
+    @media (max-width:480px) {
+        .top-header .top-nav .nav-right-button {
+            display: none;
+        }
+    }
+
+    .top-header .top-nav .nav-left > li a:hover,
+    .top-header .top-nav .nav-left > li a:focus,
+    .top-header .top-nav .nav-right > li a:hover,
+    .top-header .top-nav .nav-right > li a:focus {
+        text-decoration: none;
+    }
+
+    .top-header .top-nav .nav-left > li > .btn-group > a,
+    .top-header .top-nav .nav-right > li > .btn-group > a {
+        position: relative;
+        display: block;
+        height: 50px;
+        padding: 14px 10px;
+    }
+
+    @media (min-width: 768px) {
+        .top-header .top-nav .nav-left > li > .btn-group > a,
+        .top-header .top-nav .nav-left > li > a,
+        .top-header .top-nav .nav-right > li > .btn-group > a,
+        .top-header .top-nav .nav-right > li > a {
+            padding: 14px 15px;
+        }
+    }
+
+    .top-header .top-nav .nav-left > li > .btn-group > a .badge,
+    .top-header .top-nav .nav-left > li > a .badge,
+    .top-header .top-nav .nav-right > li > .btn-group > a .badge,
+    .top-header .top-nav .nav-right > li > a .badge {
+        position: absolute;
+        top: 6px;
+        right: 3px;
+    }
+
+    .top-header .top-nav .nav-left > li ul.dropdown-menu a:hover,
+    .top-header .top-nav .nav-right > li ul.dropdown-menu a:hover {
+        background-color: $orange;
+        color: #fff;
+    }
+
+    .top-header .top-nav .nav-left > li ul.dropdown-menu .glyphicon,
+    .top-header .top-nav .nav-right > li ul.dropdown-menu .glyphicon {
+        margin-right: 10px;
+    }
+
+    .top-header .top-nav .nav-left {
+        float: left;
+        padding: 0;
+    }
+
+    .top-header .top-nav .nav-left > li {
+    }
+
+    .top-header .top-nav .nav-right {
+        float: right;
+        padding: 0;
+    }
+
+    .top-header .top-nav .nav-right-button > li > a {
+        width: auto;
+        padding: 6px 12px;
+        height: auto;
+        line-height: 20px;
+        margin-top: 8px;
+    }
+
+    @media (max-width: 480px) {
+        .top-header .top-nav .nav-right > li > a {
+            width: 35px;
+            text-align: center;
+        }
+    }
+
+    .top-header .top-nav .nav-left > li > a {
+        color: $light-gray;
+        font-size: 25px;
+    }
+
+    .top-header .top-nav .nav-left > li > a img {
+        @include border-radius(5px);
+    }
+    // Dropdowns in header.
+    .top-header .top-nav .nav-left > li > .btn-group,
+    .top-header .top-nav .nav-left > li > .input-group,
+    .top-header .top-nav .nav-right > li > .btn-group,
+    .top-header .top-nav .nav-right > li > .input-group {
+        margin: 8px;
+    }
+
+    .top-header .langs .active-flag .flag {
+        margin-top: -5px;
+    }
+
+    .top-header .langs .list-langs a {
+        position: relative;
+        padding: 8px 20px 8px 57px;
+    }
+
+    .top-header .langs .list-langs a .flag {
+        position: absolute;
+        top: 2px;
+        left: 15px;
+    }
+}

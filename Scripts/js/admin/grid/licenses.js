@@ -149,6 +149,7 @@ var Licenses = {
 
         if (control.length > 0) {
             this.controls.grid = control.kendoGrid({
+
                 dataSource: Datasources.licenses,
                 sortable: false,
                 editable: false,

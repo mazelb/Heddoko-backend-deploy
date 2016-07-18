@@ -1,7 +1,7 @@
 ﻿[
   {
-    "outputFile": "Content/css/kendo.css",
-    "inputFile": "Content/scss/kendo.scss",
+    "outputFile": "Content/css/backend.css",
+    "inputFile": "Content/scss/backend.scss",
     "minify": {
       "enabled": true
     }

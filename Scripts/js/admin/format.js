@@ -3,6 +3,16 @@
         return url ? '<img class="img-grid" src="' + url + '" />' : '&nbsp;';
     },
     equipment: {
+        equipmentQAStatus: function (item) {
+            item = item != null ? Enums.EquipmentQAStatusType.array[item].text : "";
+
+            return '<span class="k-grid-showText">' + item + '</span>';
+        },
+        equipmentStatus: function (item) {
+            item = item != null ? Enums.EquipmentStatusType.array[item].text : "";
+
+            return '<span class="k-grid-showText">' + item + '</span>';
+        },
         status: function (item) {
             item = item != null ? Enums.EquipmentStatusType.array[item].text : "";
 
@@ -25,31 +35,6 @@
             div += ' </div>';
 
             return div;
-        },
-        prototype: function (item) {
-            item = item != null ? Enums.PrototypeType.array[item].text : "";
-
-            return '<span class="k-grid-showText">' + item + '</span>';
-        },
-        condition: function (item) {
-            item = item != null ? Enums.ConditionType.array[item].text : "";
-
-            return '<span class="k-grid-showText">' + item + '</span>';
-        },
-        numbers: function (item) {
-            item = item != null ? Enums.NumbersType.array[item].text : "";
-
-            return '<span class="k-grid-showText">' + item + '</span>';
-        },
-        heatsShrink: function (item) {
-            item = item != null ? Enums.HeatsShrinkType.array[item].text : "";
-
-            return '<span class="k-grid-showText">' + item + '</span>';
-        },
-        ship: function (item) {
-            item = item != null ? Enums.ShipType.array[item].text : "";
-
-            return '<span class="k-grid-showText">' + item + '</span>';
         },
         notes: function (item) {
             var text = item ? item.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;').replace(/\n/g, '<br/>') : '';
@@ -143,6 +128,13 @@
         },
         role: function (item) {
             item = item != null ? Enums.UserRoleType.array[item].text : "";
+
+            return '<span class="k-grid-showText">' + item + '</span>';
+        }
+    },
+    pantsOctopi: {
+        size: function (item) {
+            item = item != null ? Enums.SizeType.array[item].text : "";
 
             return '<span class="k-grid-showText">' + item + '</span>';
         }

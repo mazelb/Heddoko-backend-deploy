@@ -96,7 +96,7 @@ var Organizations = {
                     pageSizes: [10, 50, 100]
                 },
                 toolbar: [{
-                    template: '<div class="grid-checkbox"><span><input id="chk-show-deleted" type="checkbox"/>' + i18n.Resources.ShowDeleted + '</span></div>'
+                    template: '<div class="grid-checkbox"><span><input class="chk-show-deleted" type="checkbox"/>' + i18n.Resources.ShowDeleted + '</span></div>'
                 }],
                 columns: [{
                     field: 'name',
@@ -182,7 +182,7 @@ var Organizations = {
                 }
             }).data("kendoValidator");
 
-            $('#chk-show-deleted', Organizations.controls.grid.element).click(this.onShowDeleted.bind(this));
+            $('.chk-show-deleted', this.controls.grid.element).click(this.onShowDeleted.bind(this));
         }
     },
     detailInit: function (e) {

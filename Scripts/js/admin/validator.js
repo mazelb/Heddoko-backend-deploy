@@ -90,9 +90,17 @@
                 var result = KendoDS.validateDate(val)
                 if (result) {
                     return result >= kendo.date.today();
-                } 
+                }
 
                 return false;
+            }
+        }
+    },
+    pantsOctopi: {
+        location: {
+            maxSize: 255,
+            maxLengthValidation: function (input) {
+                return Validator.maxLengthValidation(input, 'name', Validator.pantsOctopi.location.maxSize);
             }
         }
     },

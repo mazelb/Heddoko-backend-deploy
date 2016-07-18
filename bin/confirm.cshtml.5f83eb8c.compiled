@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/Account/Confirm.cshtml" hash="ffffffff8fceb621" filehash="2f2cb05dab6e" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Views_Account_Confirm_cshtml">
+<preserve resultType="2" virtualPath="/Views/Account/Confirm.cshtml" hash="32422a0" filehash="280aac70c1e2" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Views_Account_Confirm_cshtml">
   <filedeps>
     <filedep name="/Views/Account/Confirm.cshtml" />
   </filedeps>

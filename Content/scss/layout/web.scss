@@ -1,0 +1,90 @@
+﻿html.web-page {
+    overflow: hidden;
+
+    body {
+        height: 1000px; /* Fix for gradient background */
+        font-family: $main_font;
+        font-size: 18px;
+        line-height: 1.42857;
+        color: $body_text_color;
+        background: $body_background_color url(../images/backgrounds/gradient800.png) top left no-repeat;
+        background-size: cover;
+        text-rendering: optimizeLegibility !important;
+        -webkit-font-smoothing: antialiased !important;
+        -moz-osx-font-smoothing: grayscale !important;
+    }
+
+    @media (min-width: 768px) {
+        body {
+            background-image: url(../images/backgrounds/gradient1000.png);
+        }
+    }
+
+    @media (min-width: 992px) {
+        body {
+            background-image: url(../images/backgrounds/gradient1600.png);
+        }
+    }
+
+    @media (min-width: 1440px) {
+        body {
+            background-image: url(../images/backgrounds/gradient2900.png);
+        }
+    }
+
+    .view-containter {
+        position: relative;
+    }
+
+    #content {
+        position: absolute;
+        top: 80px;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        left: 0;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        -webkit-overflow-scrolling: -blackberry-touch;
+        -webkit-transition: none;
+        -moz-transition: none;
+        -o-transition: none;
+        transition: none;
+    }
+
+    @media (min-width: 768px) {
+        #content {
+            top: 80px;
+            width: auto;
+            left: 270px;
+        }
+    }
+
+    .page {
+        padding: 25px;
+    }
+
+
+    .page.dashboard {
+        height: 100%;
+
+        .dashboard-menu {
+            position: relative;
+            top: 35%;
+            @include transform(translateY(-50%));
+
+            .dashboard-title {
+                margin: 30px auto;
+
+                h1 {
+                    font-weight: bold;
+                    text-transform: uppercase;
+                }
+            }
+        }
+    }
+
+    .h1, h1 {
+        font-size: 36px;
+    }
+}

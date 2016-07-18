@@ -2,33 +2,3 @@
     float: none;
     margin: 0 auto;
 }
-
-.red {
-    @include pointer();
-    color: $status-red;
-}
-
-.yellow {
-    @include pointer();
-    color: $status-yellow;
-}
-
-.green {
-     @include pointer();
-     color: $status-green;
-}
-
-.black {
-    @include pointer();
-    color: $status-black;
-}
-
-.orange {
-    @include pointer();
-    color: $status-orange;
-}
-
-.brown {
-      @include pointer();
-      color: $status-brown;
-}
