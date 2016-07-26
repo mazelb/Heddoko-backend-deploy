@@ -26,7 +26,7 @@
         anatomicalPositionImg: function (item) {
             var text = item != null ? Enums.AnatomicalPositionType.array[item].text : '';
             if (!item) {
-                return '&nbsp;'
+                return '&nbsp;';
             }
 
             var div = '<div class="body-wrap">';
@@ -37,16 +37,21 @@
             return div;
         },
         notes: function (item) {
-            var text = item ? item.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;').replace(/\n/g, '<br/>') : '';
+            var text = item != null ? item.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;').replace(/\n/g, '<br/>') : '';
             var div = '<div class="grid-notes">'
             div += text;
             div += "</div>";
             return div;
+        },
+        size: function (item) {
+            item = item != null ? Enums.SizeType.array[item].text : "";
+
+            return '<span class="k-grid-showText">' + item + '</span>';
         }
     },
     organization: {
         user: function (e) {
-            var div = '<div class="">'
+            var div = '<div class="">';
             div += i18n.Resources.Name + ': <b>' + e.user.name + '</b><br/>';
             div += i18n.Resources.Email + ': <b>' + e.user.email + '</b><br/>';
             div += i18n.Resources.Username + ': <b>' + e.user.username + '</b><br/>';
@@ -55,7 +60,7 @@
         }
     },
     notes: function (item) {
-        var text = item ? item.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;').replace(/\n/g, '<br/>') : '';
+        var text = item != null ? item.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;').replace(/\n/g, '<br/>') : '';
         var div = '<div class="grid-notes">'
         div += text;
         div += "</div>";
@@ -78,7 +83,7 @@
             var diff = Math.round((date - now) / 1000 / 60 / 60 / 24);
 
             var warning = '';
-            if (item == Enums.LicenseStatusType.enum.Active
+            if (item === Enums.LicenseStatusType.enum.Active
              && diff > 0
              && diff < 10) {
                 warning = this.iconStatus();
@@ -94,7 +99,7 @@
             return '<span class="k-grid-showText">' + icon + ' ' + item + ' ' + warning + '</span>';
         },
         used: function (item) {
-            item = item == null ? 0 : item;
+            item = item != null ? item : 0;
 
             return '<span class="k-grid-showText">' + item + '</span>';
         },
@@ -132,11 +137,142 @@
             return '<span class="k-grid-showText">' + item + '</span>';
         }
     },
-    pantsOctopi: {
-        size: function (item) {
-            item = item != null ? Enums.SizeType.array[item].text : "";
+    pants: {
+        pantsOctopi: function (item) {
+            if (item.pantsOctopi) {
+                var div = '<div class="">';
+                div += i18n.Resources.ID + ': <b>' + item.pantsOctopi.idView + '</b><br/>';
+                div += i18n.Resources.Size + ': <b>' + Format.equipment.size(item.pantsOctopi.size) + '</b><br/>';
+                div += i18n.Resources.PhysicalLocation + ': <b>' + item.pantsOctopi.location + '</b><br/>';
+                div += "</div>";
+                return div;
+            }
+            return '';
+        }
+    },
+    shirts: {
+        shirtsOctopi: function (item) {
+            if (item.shirtsOctopi) {
+                var div = '<div class="">';
+                div += i18n.Resources.ID + ': <b>' + item.shirtsOctopi.idView + '</b><br/>';
+                div += i18n.Resources.Size + ': <b>' + Format.equipment.size(item.shirtsOctopi.size) + '</b><br/>';
+                div += i18n.Resources.PhysicalLocation + ': <b>' + item.shirtsOctopi.location + '</b><br/>';
+                div += "</div>";
+                return div;
+            }
+            return '';
+        }
+    },
+    firmware: {
+        status: function (item) {
+            item = item != null ? Enums.FirmwareStatusType.array[item].text : "";
 
             return '<span class="k-grid-showText">' + item + '</span>';
+        },
+        type: function (item) {
+            item = item != null ? Enums.FirmwareType.array[item].text : "";
+
+            return '<span class="k-grid-showText">' + item + '</span>';
+        },
+        url: function (item) {
+            return item ? '<a href="' + item + '">' + i18n.Resources.Download + "</a>" : "";
+        },
+        version: function (item) {
+            if (item.firmware) {
+                var div = '<div class="">';
+                div += i18n.Resources.ID + ": <b>" + item.firmware.idView + "</b><br/>";
+                div += i18n.Resources.Version + ": <b>" + item.firmware.version + "</b><br/>";
+                div += "</div>";
+                return div;
+            }
+            return "";
+        }
+    },
+    brainpack: {
+        powerboard: function (item) {
+            if (item.powerboard) {
+                var div = '<div class="">';
+                div += i18n.Resources.ID + ": <b>" + item.powerboard.idView + "</b><br/>";
+                div += i18n.Resources.Version + ": <b>" + item.powerboard.version + "</b><br/>";
+                div += "</div>";
+                return div;
+            }
+            return "";
+        },
+        databoard: function (item) {
+            if (item.databoard) {
+                var div = '<div class="">';
+                div += i18n.Resources.ID + ": <b>" + item.databoard.idView + "</b><br/>";
+                div += i18n.Resources.Version + ": <b>" + item.databoard.version + "</b><br/>";
+                div += "</div>";
+                return div;
+            }
+            return "";
+        },
+        brainpacksQAStatusTypes: function(item) {
+            item = item != null ? Enums.BrainpacksQAStatusType.array[item].text : "";
+
+            return '<span class="k-grid-showText">' + item + '</span>';
+        }
+    },
+    kit: {
+        composition: function(item) {
+            item = item != null ? Enums.KitCompositionType.array[item].text : "";
+
+            return '<span class="k-grid-showText">' + item + '</span>';
+        },
+        organization: function (item) {
+            var div = "";
+            if (item.organization) {
+                div = '<div class="">';
+                div += i18n.Resources.ID + ": <b>" + item.organization.idView + "</b><br/>";
+                div += i18n.Resources.Name + ": <b>" + item.organization.name + "</b><br/>";
+                div += "</div>";
+            }
+            if (item.user) {
+                div += Format.organization.user(item.user);
+            }
+            return div;
+        },
+        brainpack: function(item) {
+            if (item.brainpack) {
+                var div = '<div class="">';
+                div += i18n.Resources.ID + ": <b>" + item.brainpack.idView + "</b><br/>";
+                div += i18n.Resources.Version + ": <b>" + item.brainpack.version + "</b><br/>";
+                div += "</div>";
+                return div;
+            }
+            return "";
+        },
+        sensorSet: function (item) {
+            if (item.sensorSet) {
+                var div = '<div class="">';
+                div += i18n.Resources.ID + ": <b>" + item.sensorSet.idView + "</b><br/>";
+                //TODO add aditional sensorSet fields if needed
+                div += "</div>";
+                return div;
+            }
+            return "";
+        },
+        pants: function (item) {
+            if (item.pants) {
+                var div = '<div class="">';
+                div += i18n.Resources.ID + ": <b>" + item.pants.idView + "</b><br/>";
+                div += i18n.Resources.Size + ': <b>' + Format.equipment.size(item.pants.size) + '</b><br/>';
+                div += "</div>";
+                return div;
+            }
+            return "";
+        },
+        shirt: function (item) {
+            if (item.shirt) {
+                var div = '<div class="">';
+                div += i18n.Resources.ID + ": <b>" + item.shirt.idView + "</b><br/>";
+                div += i18n.Resources.Size + ': <b>' + Format.equipment.size(item.shirt.size) + '</b><br/>';
+                div += "</div>";
+                return div;
+            }
+            return "";
         }
     }
 };

@@ -76,7 +76,32 @@ var Organizations = {
                 }
             }
         });
+
+        this.organizationsDD = Organizations.getDatasourceDD();
     },
+
+    getDatasourceDD: function (id) {
+        return new kendo.data.DataSource({
+            serverPaging: false,
+            serverFiltering: true,
+            serverSorting: false,
+            transport: KendoDS.buildTransport('/admin/api/organizations'),
+            schema: {
+                data: "response",
+                total: "total",
+                errors: "Errors",
+                model: {
+                    id: "id"
+                }
+            },
+            filter: [{
+                field: 'Used',
+                operator: 'eq',
+                value: id
+            }]
+        });
+    },
+
     init: function () {
         var control = $("#organizationsGrid");
         var filter = $('.organizationsFilter');
@@ -98,7 +123,12 @@ var Organizations = {
                 toolbar: [{
                     template: '<div class="grid-checkbox"><span><input class="chk-show-deleted" type="checkbox"/>' + i18n.Resources.ShowDeleted + '</span></div>'
                 }],
-                columns: [{
+                columns: [
+                {
+                    field: "idView",
+                    title: i18n.Resources.ID,
+                    editor: KendoDS.emptyEditor
+                }, {
                     field: 'name',
                     title: i18n.Resources.Name
                 }, {
@@ -185,6 +215,16 @@ var Organizations = {
             $('.chk-show-deleted', this.controls.grid.element).click(this.onShowDeleted.bind(this));
         }
     },
+
+    ddEditor: function (container, options) {
+        $('<input required data-text-field="name" data-value-field="id" data-value-primitive="true" data-bind="value: ' + options.field + '"/>')
+        .appendTo(container)
+        .kendoDropDownList({
+            autoBind: true,
+            dataSource: Organizations.getDatasourceDD(options.model.id)
+        });
+    },
+
     detailInit: function (e) {
         var datasourceItem = Licenses.getDatasource();
 
@@ -207,7 +247,7 @@ var Organizations = {
             }],
             columns: [
                 {
-                    field: 'viewID',
+                    field: 'idView',
                     title: i18n.Resources.ID,
                     editor: KendoDS.emptyEditor
                 }, {
@@ -285,21 +325,21 @@ var Organizations = {
             }
         };
     },
-    onDataBound: function(e) {
+    onDataBound: function (e) {
         KendoDS.onDataBound(e);
 
         $(".k-grid-delete", Organizations.controls.grid.element).each(function () {
             var currentDataItem = Organizations.controls.grid.dataItem($(this).closest("tr"));
 
-            if (currentDataItem.status == Enums.OrganizationStatusType.enum.Deleted) {
+            if (currentDataItem.status === Enums.OrganizationStatusType.enum.Deleted) {
                 $(this).remove();
             }
         });
 
         $(".k-grid-edit", Organizations.controls.grid.element).each(function () {
             var currentDataItem = Organizations.controls.grid.dataItem($(this).closest("tr"));
-           
-            if (currentDataItem.status == Enums.OrganizationStatusType.enum.Deleted) {
+
+            if (currentDataItem.status === Enums.OrganizationStatusType.enum.Deleted) {
                 $(this).remove();
             }
         });
@@ -307,7 +347,7 @@ var Organizations = {
         $(".k-grid-restore", Organizations.controls.grid.element).each(function () {
             var currentDataItem = Organizations.controls.grid.dataItem($(this).closest("tr"));
 
-            if (currentDataItem.status == Enums.OrganizationStatusType.enum.Active) {
+            if (currentDataItem.status === Enums.OrganizationStatusType.enum.Active) {
                 $(this).remove();
             }
         });
@@ -317,7 +357,7 @@ var Organizations = {
         this.isDeleted = $(e.currentTarget).prop('checked');
         this.onFilter();
     },
-    onRestore: function(e) {
+    onRestore: function (e) {
         var item = Organizations.controls.grid.dataItem($(e.currentTarget).closest("tr"));
         item.set('status', Enums.OrganizationStatusType.enum.Active);
         Organizations.controls.grid.dataSource.sync();
@@ -354,7 +394,7 @@ var Organizations = {
     },
     buildFilter: function (search) {
         Notifications.clear();
-        var search = this.controls.filterModel.search;
+        search = this.controls.filterModel.search;
 
         var filters = [];
 

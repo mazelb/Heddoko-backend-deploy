@@ -16,7 +16,7 @@ var Licenses = {
         });
 
         this.licenseTypes = new kendo.data.DataSource({
-            data: _.values(_.filter(Enums.LicenseType.array, function (u) { return u.value != Enums.LicenseType.enum.No }))
+            data: _.values(_.filter(Enums.LicenseType.array, function (u) { return u.value !== Enums.LicenseType.enum.No }))
         });
 
         this.licenses = Licenses.getDatasource();
@@ -163,7 +163,7 @@ var Licenses = {
                 },
                 columns: [
                     {
-                        field: 'viewID',
+                        field: 'idView',
                         title: i18n.Resources.ID,
                         editor: KendoDS.emptyEditor
                     }, {
@@ -243,7 +243,7 @@ var Licenses = {
         }
     },
     onEnter: function (e) {
-        if (e.keyCode == kendo.keys.ENTER) {
+        if (e.keyCode === kendo.keys.ENTER) {
             this.onFilter(e);
         }
     },
@@ -255,7 +255,7 @@ var Licenses = {
     },
     buildFilter: function (search) {
         Notifications.clear();
-        var search = this.controls.filterModel.search;
+        search = this.controls.filterModel.search;
 
         var filters = [];
 
@@ -269,7 +269,7 @@ var Licenses = {
             });
         }
 
-        return filters.length == 0 ? {} : filters;
+        return filters.length === 0 ? {} : filters;
     }
 };
 

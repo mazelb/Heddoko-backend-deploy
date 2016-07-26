@@ -1,5 +1,12 @@
 ﻿.k-grid {
     font-size: 14px;
+    a {
+        color: #337ab7;
+    }
+
+    a:hover {
+        color: #23527c;
+    }
 }
 
 .margin010 {
@@ -57,4 +64,8 @@
 
 #userLicensesDD {
     width: 200px;
+}
+
+.notification-info p {
+    font-size: 14px;
 }

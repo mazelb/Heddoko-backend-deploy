@@ -1,4 +1,4 @@
-﻿var Equpiments = {
+﻿var Equipments = {
     datasources: function () {
         //Datasources context
 
@@ -14,6 +14,21 @@
 
         this.equipmentStatusTypes.read();
 
+        this.sizeTypes = new kendo.data.DataSource({
+            data: _.values(Enums.SizeType.array)
+        });
+
+        this.sizeTypes.read();
+
+    },
+
+    sizeDDEditor: function (container, options) {
+        $('<input required data-text-field="text" data-value-field="value" data-value-primitive="true" data-bind="value: ' + options.field + '"/>')
+        .appendTo(container)
+        .kendoDropDownList({
+            autoBind: true,
+            dataSource: Datasources.sizeTypes
+        });
     },
 
     equipmentStatusDDEditor: function (container, options) {
@@ -24,6 +39,7 @@
             dataSource: Datasources.equipmentStatusTypes
         });
     },
+
     equipmentQAStatusDDEditor: function (container, options) {
         $('<input required data-text-field="text" data-value-field="value" data-value-primitive="true" data-bind="value: ' + options.field + '"/>')
         .appendTo(container)
@@ -34,4 +50,4 @@
     }
 };
 
-Datasources.bind(Equpiments.datasources);
+Datasources.bind(Equipments.datasources);

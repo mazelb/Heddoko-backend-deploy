@@ -109,6 +109,10 @@
 
 .k-grid {
   font-size: 14px; }
+  .k-grid a {
+    color: #337ab7; }
+  .k-grid a:hover {
+    color: #23527c; }
 
 .margin010 {
   margin-top: 10px; }
@@ -155,4 +159,7 @@
 
 #userLicensesDD {
   width: 200px; }
+
+.notification-info p {
+  font-size: 14px; }
 
