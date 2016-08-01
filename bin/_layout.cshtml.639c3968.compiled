@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/Shared/_Layout.cshtml" hash="fffffffff9e71233" filehash="ffffd5d446cfe162" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Views_Shared__Layout_cshtml">
+<preserve resultType="2" virtualPath="/Views/Shared/_Layout.cshtml" hash="fffffffff9e71233" filehash="ffffd5c8b4b0e691" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Views_Shared__Layout_cshtml">
   <filedeps>
     <filedep name="/Views/Shared/_Layout.cshtml" />
   </filedeps>
