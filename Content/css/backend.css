@@ -163,3 +163,12 @@
 .notification-info p {
   font-size: 14px; }
 
+.qastatus > .k-dropdown {
+  width: 300px; }
+
+div.k-edit-form-container {
+  width: 80%;
+  min-width: 600px; }
+  div.k-edit-form-container .k-edit-field > * {
+    width: 80%; }
+

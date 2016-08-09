@@ -1,4 +1,4 @@
-﻿$(function () {
+﻿$(function() {
     Powerboards.init();
 });
 
@@ -15,14 +15,20 @@ var Powerboards = {
         modelValidator: null
     },
 
-    datasources: function () {
+    datasources: function() {
         //Datasources context
         this.powerboards = Powerboards.getDatasource();
 
         this.powerboardsDD = Powerboards.getDatasourceDD();
+
+        this.powerboardQAStatusTypes = new kendo.data.DataSource({
+            data: _.values(Enums.PowerboardQAStatusType.array)
+        });
+
+        this.powerboardQAStatusTypes.read();
     },
 
-    getDatasourceDD: function (id) {
+    getDatasourceDD: function(id) {
         return new kendo.data.DataSource({
             serverPaging: false,
             serverFiltering: true,
@@ -36,15 +42,17 @@ var Powerboards = {
                     id: "id"
                 }
             },
-            filter: [{
-                field: 'Used',
-                operator: 'eq',
-                value: id
-            }]
+            filter: [
+                {
+                    field: 'Used',
+                    operator: 'eq',
+                    value: id
+                }
+            ]
         });
     },
 
-    getDatasource: function () {
+    getDatasource: function() {
         return new kendo.data.DataSource({
             pageSize: KendoDS.pageSize,
             serverPaging: true,
@@ -93,6 +101,29 @@ var Powerboards = {
                                 min: 0,
                                 max: KendoDS.maxInt
                             }
+                        },
+                        qaStatus: {
+                            nullable: false,
+                            type: "number",
+                            validation: {
+                                required: true,
+                                min: 0,
+                                max: KendoDS.maxInt
+                            }
+                        },
+                        label: {
+                            nullable: true,
+                            type: "string",
+                            validation: {
+                                maxLengthValidation: Validator.equipment.label.maxLengthValidation
+                            }
+                        },
+                        notes: {
+                            nullable: true,
+                            type: "string",
+                            validation: {
+                                maxLengthValidation: Validator.equipment.notes.maxLengthValidation
+                            }
                         }
                     }
                 }
@@ -100,77 +131,101 @@ var Powerboards = {
         });
     },
 
-    init: function () {
+    init: function() {
         var control = $("#powerboardsGrid");
         var filter = $(".powerboardsFilter");
         this.controls.form = $(".powerboardsForm");
 
         if (control.length > 0) {
             this.controls.grid = control.kendoGrid({
-                dataSource: Datasources.powerboards,
-                sortable: false,
-                editable: "popup",
-                selectable: false,
-                scrollable: false,
-                resizeable: true,
-                autoBind: true,
-                pageable: {
-                    refresh: true,
-                    pageSizes: [10, 50, 100]
-                },
-                toolbar: [{
-                    template: '<div class="grid-checkbox"><span><input class="chk-show-deleted" type="checkbox"/>' + i18n.Resources.ShowDeleted + '</span></div>'
-                }],
-                columns: [
-                {
-                    field: "idView",
-                    title: i18n.Resources.ID,
-                    editor: KendoDS.emptyEditor
-                },
-                {
-                    field: "firmwareID",
-                    title: i18n.Resources.FirmwareVersion,
-                    template: function (e) {
-                        return Format.firmware.version(e);
+                    dataSource: Datasources.powerboards,
+                    sortable: false,
+                    editable: "popup",
+                    selectable: false,
+                    scrollable: false,
+                    resizeable: true,
+                    autoBind: true,
+                    pageable: {
+                        refresh: true,
+                        pageSizes: [10, 50, 100]
                     },
-                    editor: Firmwares.ddEditorPowerboards
-                },
-                {
-                    field: "version",
-                    title: i18n.Resources.Version
-                },
-                {
-                    field: "location",
-                    title: i18n.Resources.PhysicalLocation
-                },
-                {
-                    field: "status",
-                    title: i18n.Resources.Status,
-                    template: function (e) {
-                        return Format.equipment.equipmentStatus(e.status);
-                    },
-                    editor: Equipments.equipmentStatusDDEditor
-                }, {
-                    command: [{
-                        name: "edit",
-                        text: i18n.Resources.Edit,
-                        className: "k-grid-edit"
-                    }, {
-                        name: "destroy",
-                        text: i18n.Resources.Delete,
-                        className: "k-grid-delete"
-                    }, {
-                        text: i18n.Resources.Restore,
-                        className: "k-grid-restore",
-                        click: this.onRestore
-                    }],
-                    title: i18n.Resources.Actions,
-                    width: '165px'
-                }
-                ],
-                save: KendoDS.onSave,
-                dataBound: this.onDataBound
-            }).data("kendoGrid");
+                    toolbar: [
+                        {
+                            template:
+                                '<div class="grid-checkbox"><span><input class="chk-show-deleted" type="checkbox"/>' +
+                                    i18n.Resources.ShowDeleted +
+                                    '</span></div>'
+                        }
+                    ],
+                    columns: [
+                        {
+                            field: "idView",
+                            title: i18n.Resources.ID,
+                            editor: KendoDS.emptyEditor
+                        },
+                        {
+                            field: 'label',
+                            title: i18n.Resources.Label
+                        },
+                        {
+                            field: "firmwareID",
+                            title: i18n.Resources.FirmwareVersion,
+                            template: function(e) {
+                                return Format.firmware.version(e);
+                            },
+                            editor: Firmwares.ddEditorPowerboards
+                        },
+                        {
+                            field: "version",
+                            title: i18n.Resources.Version
+                        },
+                        {
+                            field: "location",
+                            title: i18n.Resources.PhysicalLocation
+                        },
+                        {
+                            field: "status",
+                            title: i18n.Resources.Status,
+                            template: function(e) {
+                                return Format.equipment.equipmentStatus(e.status);
+                            },
+                            editor: Equipments.equipmentStatusDDEditor
+                        }, {
+                            field: "qaStatus",
+                            title: i18n.Resources.QAStatus,
+                            template: function (e) {
+                                return Format.powerboard.qaStatus(e.qaStatus);
+                            },
+                            editor: this.qaStatusTypesDDEditor
+                        },
+                        {
+                            field: 'notes',
+                            title: i18n.Resources.Notes,
+                            editor: KendoDS.textAreaDDEditor
+                        }, {
+                            command: [
+                                {
+                                    name: "edit",
+                                    text: i18n.Resources.Edit,
+                                    className: "k-grid-edit"
+                                }, {
+                                    name: "destroy",
+                                    text: i18n.Resources.Delete,
+                                    className: "k-grid-delete"
+                                }, {
+                                    text: i18n.Resources.Restore,
+                                    className: "k-grid-restore",
+                                    click: this.onRestore
+                                }
+                            ],
+                            title: i18n.Resources.Actions,
+                            width: '165px'
+                        }
+                    ],
+                    save: KendoDS.onSave,
+                    dataBound: this.onDataBound
+                })
+                .data("kendoGrid");
 
             KendoDS.bind(this.controls.grid, true);
 
@@ -187,6 +242,7 @@ var Powerboards = {
                 submit: this.onAdd.bind(this),
                 sizes: Datasources.sizeTypes,
                 statuses: Datasources.equipmentStatusTypes,
+                qaStatuses: Datasources.powerboardQAStatusTypes,
                 firmwares: Datasources.firmwaresPowerboards,
                 model: this.getEmptyModel()
             });
@@ -194,71 +250,87 @@ var Powerboards = {
             kendo.bind(this.controls.form, this.controls.addModel);
 
             this.validators.addModel = this.controls.form.kendoValidator({
-                validateOnBlur: true,
-                rules: {
-                    maxLengthValidationLocation: Validator.equipment.location.maxLengthValidation
-                }
-            }).data("kendoValidator");
+                    validateOnBlur: true,
+                    rules: {
+                        maxLengthValidationLocation: Validator.equipment.location.maxLengthValidation
+                    }
+                })
+                .data("kendoValidator");
 
             $(".chk-show-deleted", this.controls.grid.element).click(this.onShowDeleted.bind(this));
         }
     },
 
-    ddEditor: function (container, options) {
+    ddEditor: function(container, options) {
         $('<input required data-text-field="name" data-value-field="id" data-value-primitive="true" data-bind="value: ' + options.field + '"/>')
-        .appendTo(container)
-        .kendoDropDownList({
-            autoBind: true,
-            dataSource: Powerboards.getDatasourceDD(options.model.id)
-        });
+            .appendTo(container)
+            .kendoDropDownList({
+                autoBind: true,
+                dataSource: Powerboards.getDatasourceDD(options.model.id)
+            });
     },
 
-    onDataBound: function (e) {
+    qaStatusTypesDDEditor: function (container, options) {
+        $('<input required data-text-field="text" data-value-field="value" data-value-primitive="true" data-bind="value: ' + options.field + '"/>')
+            .appendTo(container)
+            .kendoDropDownList({
+                autoBind: true,
+                dataSource: Datasources.powerboardQAStatusTypes
+            });
+    },
+
+    onDataBound: function(e) {
         KendoDS.onDataBound(e);
 
         var grid = Powerboards.controls.grid;
         var enumarable = Enums.EquipmentStatusType.enum;
 
-        $(".k-grid-delete", grid.element).each(function () {
-            var currentDataItem = grid.dataItem($(this).closest("tr"));
+        $(".k-grid-delete", grid.element)
+            .each(function() {
+                var currentDataItem = grid.dataItem($(this).closest("tr"));
 
-            if (currentDataItem.status === enumarable.Trash) {
-                $(this).remove();
-            }
-        });
+                if (currentDataItem.status === enumarable.Trash) {
+                    $(this).remove();
+                }
+            });
 
-        $(".k-grid-edit", grid.element).each(function () {
-            var currentDataItem = grid.dataItem($(this).closest("tr"));
+        $(".k-grid-edit", grid.element)
+            .each(function() {
+                var currentDataItem = grid.dataItem($(this).closest("tr"));
 
-            if (currentDataItem.status === enumarable.Trash) {
-                $(this).remove();
-            }
-        });
+                if (currentDataItem.status === enumarable.Trash) {
+                    $(this).remove();
+                }
+            });
 
-        $(".k-grid-restore", grid.element).each(function () {
-            var currentDataItem = grid.dataItem($(this).closest("tr"));
+        $(".k-grid-restore", grid.element)
+            .each(function() {
+                var currentDataItem = grid.dataItem($(this).closest("tr"));
 
-            if (currentDataItem.status !== enumarable.Trash) {
-                $(this).remove();
-            }
-        });
+                if (currentDataItem.status !== enumarable.Trash) {
+                    $(this).remove();
+                }
+            });
     },
 
-    getEmptyModel: function () {
+    getEmptyModel: function() {
         return {
             version: null,
             firmwareID: null,
             location: null,
-            status: null
+            status: null,
+            qaStatus: null,
+            label: null,
+            notes: null
         };
     },
 
-    onShowDeleted: function (e) {
+    onShowDeleted: function(e) {
         this.isDeleted = $(e.currentTarget).prop("checked");
         this.onFilter();
     },
 
-    onRestore: function (e) {
+    onRestore: function(e) {
         var grid = Powerboards.controls.grid;
 
         var item = grid.dataItem($(e.currentTarget).closest("tr"));
@@ -266,48 +338,46 @@ var Powerboards = {
         grid.dataSource.sync();
     },
 
-    onReset: function (e) {
+    onReset: function(e) {
         this.controls.addModel.set("model", this.getEmptyModel());
     },
 
-    onAdd: function (e) {
+    onAdd: function(e) {
         Notifications.clear();
         if (this.validators.addModel.validate()) {
             var obj = this.controls.addModel.get("model");
 
             this.controls.grid.dataSource.add(obj);
             this.controls.grid.dataSource.sync();
-            this.controls.grid.dataSource.one("requestEnd", function (ev) {
-                if (ev.type === "create"
-                && !ev.response.Errors) {
-                    this.onReset();
-                }
-            }.bind(this));
+            this.controls.grid.dataSource.one("requestEnd",
+                function(ev) {
+                    if (ev.type === "create" && !ev.response.Errors) {
+                        this.onReset();
+                    }
+                }.bind(this));
         }
     },
 
-    onEnter: function (e) {
+    onEnter: function(e) {
         if (e.keycode === kendo.keys.ENTER) {
             this.onFilter(e);
         }
     },
 
-    onFilter: function (e) {
+    onFilter: function(e) {
         var filters = this.buildFilter();
         if (filters) {
             this.controls.grid.dataSource.filter(filters);
         }
     },
 
-    buildFilter: function (search) {
+    buildFilter: function(search) {
         Notifications.clear();
         search = this.controls.filterModel.search;
 
         var filters = [];
 
-        if (typeof (search) !== "undefined"
-         && search !== ""
-         && search !== null) {
+        if (typeof (search) !== "undefined" && search !== "" && search !== null) {
             filters.push({
                 field: "Search",
                 operator: "eq",

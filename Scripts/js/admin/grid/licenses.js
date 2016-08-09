@@ -21,7 +21,11 @@ var Licenses = {
 
         this.licenses = Licenses.getDatasource();
 
-        this.licenseDD = new kendo.data.DataSource({
+        this.licenseDD = Licenses.getDatasourceDD();
+    },
+
+    getDatasourceDD: function(id) {
+        return new kendo.data.DataSource({
             serverPaging: false,
             serverFiltering: true,
             serverSorting: false,
@@ -34,11 +38,13 @@ var Licenses = {
                     id: "id"
                 }
             },
-            filter: [{
-                field: 'Used',
-                operator: 'eq',
-                value: false
-            }]
+            filter: [
+                {
+                    field: 'Used',
+                    operator: 'eq',
+                    value: id
+                }
+            ]
         });
     },
     getDatasource: function () {
@@ -52,7 +58,7 @@ var Licenses = {
                     case 'create':
                     case 'update':
                         if (options.expirationAt) {
-                            options.expirationAt = kendo.toString(options.expirationAt, "yyyy/MM/dd")
+                            options.expirationAt = kendo.toString(options.expirationAt, "yyyy/MM/dd");
                         }
                         if (options.models) {
                             return kendo.stringify(options.models);
@@ -123,7 +129,7 @@ var Licenses = {
         .appendTo(container)
         .kendoDropDownList({
             autoBind: true,
-            dataSource: Datasources.licenseDD
+            dataSource: Licenses.getDatasourceDD(options.model.id)
         });
     },
     statusDDEditor: function (container, options) {

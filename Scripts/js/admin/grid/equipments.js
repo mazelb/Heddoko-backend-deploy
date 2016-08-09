@@ -1,5 +1,5 @@
 ﻿var Equipments = {
-    datasources: function () {
+    datasources: function() {
         //Datasources context
 
         this.equipmentQAStatusTypes = new kendo.data.DataSource({
@@ -20,33 +20,47 @@
 
         this.sizeTypes.read();
 
+        this.anatomicalLocationTypes = new kendo.data.DataSource({
+            data: _.values(Enums.AnatomicalLocationType.array)
+        });
+
+        this.anatomicalLocationTypes.read();
     },
 
-    sizeDDEditor: function (container, options) {
+    sizeDDEditor: function(container, options) {
         $('<input required data-text-field="text" data-value-field="value" data-value-primitive="true" data-bind="value: ' + options.field + '"/>')
-        .appendTo(container)
-        .kendoDropDownList({
-            autoBind: true,
-            dataSource: Datasources.sizeTypes
-        });
+            .appendTo(container)
+            .kendoDropDownList({
+                autoBind: true,
+                dataSource: Datasources.sizeTypes
+            });
     },
 
-    equipmentStatusDDEditor: function (container, options) {
+    equipmentStatusDDEditor: function(container, options) {
         $('<input required data-text-field="text" data-value-field="value" data-value-primitive="true" data-bind="value: ' + options.field + '"/>')
-        .appendTo(container)
-        .kendoDropDownList({
-            autoBind: true,
-            dataSource: Datasources.equipmentStatusTypes
-        });
+            .appendTo(container)
+            .kendoDropDownList({
+                autoBind: true,
+                dataSource: Datasources.equipmentStatusTypes
+            });
     },
 
-    equipmentQAStatusDDEditor: function (container, options) {
+    equipmentQAStatusDDEditor: function(container, options) {
         $('<input required data-text-field="text" data-value-field="value" data-value-primitive="true" data-bind="value: ' + options.field + '"/>')
-        .appendTo(container)
-        .kendoDropDownList({
-            autoBind: true,
-            dataSource: Datasources.equipmentQAStatusTypes
-        });
+            .appendTo(container)
+            .kendoDropDownList({
+                autoBind: true,
+                dataSource: Datasources.equipmentQAStatusTypes
+            });
+    },
+
+    anatomicalLocationDDEditor: function(container, options) {
+        $('<input required data-text-field="text" data-value-field="value" data-value-primitive="true" data-bind="value: ' + options.field + '"/>')
+            .appendTo(container)
+            .kendoDropDownList({
+                autoBind: true,
+                dataSource: Datasources.anatomicalLocationTypes
+            });
     }
 };
 

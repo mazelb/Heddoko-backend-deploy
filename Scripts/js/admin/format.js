@@ -18,14 +18,14 @@
 
             return '<span class="k-grid-showText">' + item + '</span>';
         },
-        anatomicalPosition: function (item) {
-            item = item != null ? Enums.AnatomicalPositionType.array[item].text : i18n.Resources.None;
+        anatomicalLocation: function (item) {
+            item = item != null ? Enums.AnatomicalLocationType.array[item].text : i18n.Resources.None;
 
             return '<span class="k-grid-showText">' + item + '</span>';
         },
-        anatomicalPositionImg: function (item) {
-            var text = item != null ? Enums.AnatomicalPositionType.array[item].text : '';
-            if (!item) {
+        anatomicalLocationImg: function (item) {
+            var text = item != null ? Enums.AnatomicalLocationType.array[item].text : '';
+            if (item == null) {
                 return '&nbsp;';
             }
 
@@ -48,6 +48,7 @@
 
             return '<span class="k-grid-showText">' + item + '</span>';
         }
+
     },
     organization: {
         user: function (e) {
@@ -61,7 +62,7 @@
     },
     notes: function (item) {
         var text = item != null ? item.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;').replace(/\n/g, '<br/>') : '';
-        var div = '<div class="grid-notes">'
+        var div = '<div class="grid-notes">';
         div += text;
         div += "</div>";
         return div;
@@ -135,9 +136,23 @@
             item = item != null ? Enums.UserRoleType.array[item].text : "";
 
             return '<span class="k-grid-showText">' + item + '</span>';
+        },
+        kit: function (item) {
+            var div = "";
+            if (item.kit) {
+                div = '<div class="">';
+                div += i18n.Resources.ID + ": <b>" + item.kit.idView + "</b><br/>";
+                div += "</div>";
+            }
+            return div;
         }
     },
     pants: {
+        qaStatus: function (item) {
+            item = item != null ? Enums.PantsQAStatusType.array[item].text : "";
+
+            return '<span class="k-grid-showText">' + item + '</span>';
+        },
         pantsOctopi: function (item) {
             if (item.pantsOctopi) {
                 var div = '<div class="">';
@@ -150,7 +165,19 @@
             return '';
         }
     },
+    pantsOctopi: {
+        qaStatus: function (item) {
+            item = item != null ? Enums.PantsOctopiQAStatusType.array[item].text : "";
+
+            return '<span class="k-grid-showText">' + item + '</span>';
+        }
+    },
     shirts: {
+        qaStatus: function (item) {
+            item = item != null ? Enums.ShirtQAStatusType.array[item].text : "";
+
+            return '<span class="k-grid-showText">' + item + '</span>';
+        },
         shirtsOctopi: function (item) {
             if (item.shirtsOctopi) {
                 var div = '<div class="">';
@@ -161,6 +188,20 @@
                 return div;
             }
             return '';
+        }
+    },
+    shirtOctopi: {
+        qaStatus: function (item) {
+            item = item != null ? Enums.ShirtOctopiQAStatusType.array[item].text : "";
+
+            return '<span class="k-grid-showText">' + item + '</span>';
+        }
+    },
+    components: {
+        componentsType: function (item) {
+            item = item != null ? Enums.ComponentsType.array[item].text : "";
+
+            return '<span class="k-grid-showText">' + item + '</span>';
         }
     },
     firmware: {
@@ -189,6 +230,11 @@
         }
     },
     brainpack: {
+        qaStatus: function (item) {
+            item = item != null ? Enums.BrainpackQAStatusType.array[item].text : "";
+
+            return '<span class="k-grid-showText">' + item + '</span>';
+        },
         powerboard: function (item) {
             if (item.powerboard) {
                 var div = '<div class="">';
@@ -208,15 +254,15 @@
                 return div;
             }
             return "";
-        },
-        brainpacksQAStatusTypes: function(item) {
-            item = item != null ? Enums.BrainpacksQAStatusType.array[item].text : "";
-
-            return '<span class="k-grid-showText">' + item + '</span>';
         }
     },
     kit: {
-        composition: function(item) {
+        qaStatus: function (item) {
+            item = item != null ? Enums.KitQAStatusType.array[item].text : "";
+
+            return '<span class="k-grid-showText">' + item + '</span>';
+        },
+        composition: function (item) {
             item = item != null ? Enums.KitCompositionType.array[item].text : "";
 
             return '<span class="k-grid-showText">' + item + '</span>';
@@ -234,7 +280,7 @@
             }
             return div;
         },
-        brainpack: function(item) {
+        brainpack: function (item) {
             if (item.brainpack) {
                 var div = '<div class="">';
                 div += i18n.Resources.ID + ": <b>" + item.brainpack.idView + "</b><br/>";
@@ -273,6 +319,48 @@
                 return div;
             }
             return "";
+        }
+    },
+    sensors: {
+        qaStatus: function (item) {
+            item = item != null ? Enums.SensorQAStatusType.array[item].text : "";
+
+            return '<span class="k-grid-showText">' + item + '</span>';
+        },
+        type: function (item) {
+            item = item != null ? Enums.SensorType.array[item].text : "";
+
+            return '<span class="k-grid-showText">' + item + '</span>';
+        },
+        kit: function (item) {
+            var div = "";
+            if (item.kit) {
+                div += '<div class="">';
+                div += i18n.Resources.ID + ": <b>" + item.kit.idView + "</b><br/>";
+                div += "</div>";
+            }
+            return div;
+        }
+    },
+    sensorSet: {
+        qaStatus: function (item) {
+            item = item != null ? Enums.SensorSetQAStatusType.array[item].text : "";
+
+            return '<span class="k-grid-showText">' + item + '</span>';
+        }
+    },
+    powerboard: {
+        qaStatus: function (item) {
+            item = item != null ? Enums.DataboardQAStatusType.array[item].text : "";
+
+            return '<span class="k-grid-showText">' + item + '</span>';
+        }
+    },
+    databoard: {
+        qaStatus: function (item) {
+            item = item != null ? Enums.PowerboardQAStatusType.array[item].text : "";
+
+            return '<span class="k-grid-showText">' + item + '</span>';
         }
     }
 };
