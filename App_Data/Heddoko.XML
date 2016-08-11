@@ -503,6 +503,14 @@
             <param name="kitID">The id of kit. optional</param>
             <param name="type">The type of upload. required</param>
         </member>
+        <member name="M:Heddoko.Controllers.API.AssetsAPIController.List(System.Int32,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+                List of files
+            </summary>
+            <param name="userID">The filter by userID</param>
+            <param name="take">The amount of take entries</param>
+            <param name="skip">The amoun of skip entries</param>
+        </member>
         <member name="M:Heddoko.Controllers.API.UsersAPIController.Profile">
             <summary>
                 Get profile of current user
