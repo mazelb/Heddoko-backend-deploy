@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/Admin/Index.cshtml" hash="32422a0" filehash="ffffcac0d60013e7" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Views_Admin_Index_cshtml">
+<preserve resultType="2" virtualPath="/Views/Admin/Index.cshtml" hash="32422a0" filehash="fffff82e70f42bfb" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Views_Admin_Index_cshtml">
   <filedeps>
     <filedep name="/Views/Admin/Index.cshtml" />
   </filedeps>
