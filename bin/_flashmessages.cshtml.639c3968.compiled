@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/Shared/_FlashMessages.cshtml" hash="32422a0" filehash="ffffeb4b044691bb" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Views_Shared__FlashMessages_cshtml">
+<preserve resultType="2" virtualPath="/Views/Shared/_FlashMessages.cshtml" hash="32422a0" filehash="13fcb2249235" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Views_Shared__FlashMessages_cshtml">
   <filedeps>
     <filedep name="/Views/Shared/_FlashMessages.cshtml" />
   </filedeps>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/Email/ForgotUsernameEmail.cshtml" hash="32422a0" filehash="26b9cdbf0bdb" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Views_Email_ForgotUsernameEmail_cshtml">
+<preserve resultType="2" virtualPath="/Views/Email/ForgotUsernameEmail.cshtml" hash="32422a0" filehash="ffffd876e130b9cd" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Views_Email_ForgotUsernameEmail_cshtml">
   <filedeps>
     <filedep name="/Views/Email/ForgotUsernameEmail.cshtml" />
   </filedeps>
