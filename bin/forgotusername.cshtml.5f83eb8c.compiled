@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/Account/ForgotUsername.cshtml" hash="32422a0" filehash="ffffff109b57484d" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Views_Account_ForgotUsername_cshtml">
+<preserve resultType="2" virtualPath="/Views/Account/ForgotUsername.cshtml" hash="32422a0" filehash="ffffff0f8e051c96" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Views_Account_ForgotUsername_cshtml">
   <filedeps>
     <filedep name="/Views/Account/ForgotUsername.cshtml" />
   </filedeps>
