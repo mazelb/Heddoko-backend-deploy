@@ -3,6 +3,9 @@
         return url ? '<img class="img-grid" src="' + url + '" />' : '&nbsp;';
     },
     equipment: {
+        qaStatus: function (item) {
+            return '<span class="k-grid-showText">' + (item != null ? item.replace(/,/g, '<br/>') : '') + '</span>';
+        },
         equipmentQAStatus: function (item) {
             item = item != null ? Enums.EquipmentQAStatusType.array[item].text : "";
 
@@ -174,9 +177,7 @@
     },
     shirts: {
         qaStatus: function (item) {
-            item = item != null ? Enums.ShirtQAStatusType.array[item].text : "";
-
-            return '<span class="k-grid-showText">' + item + '</span>';
+            return '<span class="k-grid-showText">' + (item != null ? item.replace(/,/g, '<br/>') : '') + '</span>';
         },
         shirtsOctopi: function (item) {
             if (item.shirtsOctopi) {
@@ -231,9 +232,7 @@
     },
     brainpack: {
         qaStatus: function (item) {
-            item = item != null ? Enums.BrainpackQAStatusType.array[item].text : "";
-
-            return '<span class="k-grid-showText">' + item + '</span>';
+            return '<span class="k-grid-showText">' + (item != null ? item.replace(/,/g, '<br/>') : '') + '</span>';
         },
         powerboard: function (item) {
             if (item.powerboard) {
@@ -275,7 +274,7 @@
                 div += i18n.Resources.Name + ": <b>" + item.organization.name + "</b><br/>";
                 div += "</div>";
             }
-            if (item.user) {
+            if (item.organization && item.organization.user) {
                 div += Format.organization.user(item.user);
             }
             return div;
@@ -323,9 +322,7 @@
     },
     sensors: {
         qaStatus: function (item) {
-            item = item != null ? Enums.SensorQAStatusType.array[item].text : "";
-
-            return '<span class="k-grid-showText">' + item + '</span>';
+            return '<span class="k-grid-showText">' + (item != null ? item.replace(/,/g, '<br/>') : '') + '</span>';
         },
         type: function (item) {
             item = item != null ? Enums.SensorType.array[item].text : "";
@@ -351,16 +348,12 @@
     },
     powerboard: {
         qaStatus: function (item) {
-            item = item != null ? Enums.DataboardQAStatusType.array[item].text : "";
-
-            return '<span class="k-grid-showText">' + item + '</span>';
+            return '<span class="k-grid-showText">' + (item != null ? item.replace(/,/g, '<br/>') : '') + '</span>';
         }
     },
     databoard: {
         qaStatus: function (item) {
-            item = item != null ? Enums.PowerboardQAStatusType.array[item].text : "";
-
-            return '<span class="k-grid-showText">' + item + '</span>';
+            return '<span class="k-grid-showText">' + (item != null ? item.replace(/,/g, '<br/>') : '') + '</span>';
         }
     }
 };

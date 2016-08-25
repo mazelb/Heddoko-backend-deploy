@@ -225,9 +225,9 @@ var Brainpacks = {
                             field: "qaStatus",
                             title: i18n.Resources.QAStatus,
                             template: function(e) {
-                                return Format.brainpack.qaStatus(e.qaStatus);
+                                return Format.brainpack.qaStatus(e.qaStatusText);
                             },
-                            editor: this.qaStatusTypesDDEditor
+                            editor: KendoDS.emptyEditor
                         },
                         {
                             field: 'notes',
@@ -254,6 +254,8 @@ var Brainpacks = {
                         }
                     ],
                     save: KendoDS.onSave,
+                    detailInit: this.detailInit.bind(this),
+                    detailTemplate: kendo.template($("#brainpacks-qastatuses-template").html()),
                     dataBound: this.onDataBound
                 })
                 .data("kendoGrid");
@@ -336,13 +338,35 @@ var Brainpacks = {
             });
     },
 
-    qaStatusTypesDDEditor: function(container, options) {
-        $('<input required data-text-field="text" data-value-field="value" data-value-primitive="true" data-bind="value: ' + options.field + '"/>')
-            .appendTo(container)
-            .kendoDropDownList({
-                autoBind: true,
-                dataSource: Datasources.brainpackQAStatusTypes
-            });
+    detailInit: function (e) {
+        var detailRow = e.detailRow;
+
+        detailRow.find(".tabstrip").kendoTabStrip({
+            animation: {
+                open: { effects: "fadeIn" }
+            }
+        });
+
+        var qaModel = _.zipObject(e.data.qaModel, _.map(e.data.qaModel, function (ev) { return true }));
+        var model = kendo.observable({
+            id: e.data.id,
+            qamodel: qaModel,
+            save: this.onSaveQAStatus
+        });
+
+        kendo.bind(detailRow.find('.qa-statuses'), model);
+    },
+
+    onSaveQAStatus: function (e) {
+        var model = this.get('qamodel');
+
+        var grid = Brainpacks.controls.grid;
+
+        var item = grid.dataSource.get(this.get('id'));
+        item.set('qaStatuses', model.toJSON());
+        item.dirty = true;
+
+        Brainpacks.controls.grid.dataSource.sync();
     },
 
     getEmptyModel: function() {

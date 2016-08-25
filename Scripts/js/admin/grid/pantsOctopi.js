@@ -4,6 +4,7 @@
 
 var PantsOctopi = {
     isDeleted: false,
+
     controls: {
         grid: null,
         filterModel: null,
@@ -130,90 +131,92 @@ var PantsOctopi = {
 
         if (control.length > 0) {
             this.controls.grid = control.kendoGrid({
-                    dataSource: Datasources.pantsOctopi,
-                    sortable: false,
-                    editable: "popup",
-                    selectable: false,
-                    scrollable: false,
-                    resizeable: true,
-                    autoBind: true,
-                    pageable: {
-                        refresh: true,
-                        pageSizes: [10, 50, 100]
+                dataSource: Datasources.pantsOctopi,
+                sortable: false,
+                editable: "popup",
+                selectable: false,
+                scrollable: false,
+                resizeable: true,
+                autoBind: true,
+                pageable: {
+                    refresh: true,
+                    pageSizes: [10, 50, 100]
+                },
+                toolbar: [
+                    {
+                        template:
+                            '<div class="grid-checkbox"><span><input class="chk-show-deleted" type="checkbox"/>' +
+                                i18n.Resources.ShowDeleted +
+                                '</span></div>'
+                    }
+                ],
+                columns: [
+                    {
+                        field: 'idView',
+                        title: i18n.Resources.ID,
+                        editor: KendoDS.emptyEditor
                     },
-                    toolbar: [
-                        {
-                            template:
-                                '<div class="grid-checkbox"><span><input class="chk-show-deleted" type="checkbox"/>' +
-                                    i18n.Resources.ShowDeleted +
-                                    '</span></div>'
-                        }
-                    ],
-                    columns: [
-                        {
-                            field: 'idView',
-                            title: i18n.Resources.ID,
-                            editor: KendoDS.emptyEditor
+                    {
+                        field: 'label',
+                        title: i18n.Resources.Label
+                    },
+                    {
+                        field: 'size',
+                        title: i18n.Resources.Size,
+                        template: function(e) {
+                            return Format.equipment.size(e.size);
                         },
-                        {
-                            field: 'label',
-                            title: i18n.Resources.Label
+                        editor: Equipments.sizeDDEditor
+                    },
+                    {
+                        field: 'location',
+                        title: i18n.Resources.PhysicalLocation
+                    },
+                    {
+                        field: 'status',
+                        title: i18n.Resources.Status,
+                        template: function(e) {
+                            return Format.equipment.equipmentStatus(e.status);
                         },
-                        {
-                            field: 'size',
-                            title: i18n.Resources.Size,
-                            template: function(e) {
-                                return Format.equipment.size(e.size);
-                            },
-                            editor: Equipments.sizeDDEditor
+                        editor: Equipments.equipmentStatusDDEditor
+                    }, {
+                        field: "qaStatus",
+                        title: i18n.Resources.QAStatus,
+                        template: function (e) {
+                            return Format.equipment.qaStatus(e.qaStatusText);
                         },
-                        {
-                            field: 'location',
-                            title: i18n.Resources.PhysicalLocation
-                        },
-                        {
-                            field: 'status',
-                            title: i18n.Resources.Status,
-                            template: function(e) {
-                                return Format.equipment.equipmentStatus(e.status);
-                            },
-                            editor: Equipments.equipmentStatusDDEditor
-                        }, {
-                            field: "qaStatus",
-                            title: i18n.Resources.QAStatus,
-                            template: function (e) {
-                                return Format.pantsOctopi.qaStatus(e.qaStatus);
-                            },
-                            editor: this.qaStatusTypesDDEditor
-                        },
-                        {
-                            field: 'notes',
-                            title: i18n.Resources.Notes,
-                            editor: KendoDS.textAreaDDEditor
-                        }, {
-                            command: [
-                                {
-                                    name: "edit",
-                                    text: i18n.Resources.Edit,
-                                    className: "k-grid-edit"
-                                }, {
-                                    name: "destroy",
-                                    text: i18n.Resources.Delete,
-                                    className: "k-grid-delete"
-                                }, {
-                                    text: i18n.Resources.Restore,
-                                    className: "k-grid-restore",
-                                    click: this.onRestore
-                                }
-                            ],
-                            title: i18n.Resources.Actions,
-                            width: '165px'
-                        }
-                    ],
-                    save: KendoDS.onSave,
-                    dataBound: this.onDataBound
-                })
-                .data("kendoGrid");
+                        editor: KendoDS.emptyEditor
+                    },
+                    {
+                        field: 'notes',
+                        title: i18n.Resources.Notes,
+                        editor: KendoDS.textAreaDDEditor
+                    }, {
+                        command: [
+                            {
+                                name: "edit",
+                                text: i18n.Resources.Edit,
+                                className: "k-grid-edit"
+                            }, {
+                                name: "destroy",
+                                text: i18n.Resources.Delete,
+                                className: "k-grid-delete"
+                            }, {
+                                text: i18n.Resources.Restore,
+                                className: "k-grid-restore",
+                                click: this.onRestore
+                            }
+                        ],
+                        title: i18n.Resources.Actions,
+                        width: '165px'
+                    }
+                ],
+                save: KendoDS.onSave,
+                detailInit: this.detailInit.bind(this),
+                detailTemplate: kendo.template($("#pantsoctopi-qastatuses-template").html()),
+                dataBound: this.onDataBound
+            })
+            .data("kendoGrid");
 
             KendoDS.bind(this.controls.grid, true);
 
@@ -230,7 +233,7 @@ var PantsOctopi = {
                 submit: this.onAdd.bind(this),
                 sizes: Datasources.sizeTypes,
                 statuses: Datasources.equipmentStatusTypes,
-                qaStatuses: Datasources.pantsQAStatusTypes,
+                qaStatuses: Datasources.pantsOctopiQAStatusTypes,
                 model: this.getEmptyModel()
             });
 
@@ -292,13 +295,35 @@ var PantsOctopi = {
             });
     },
 
-    qaStatusTypesDDEditor: function (container, options) {
-        $('<input required data-text-field="text" data-value-field="value" data-value-primitive="true" data-bind="value: ' + options.field + '"/>')
-            .appendTo(container)
-            .kendoDropDownList({
-                autoBind: true,
-                dataSource: Datasources.pantsOctopiQAStatusTypes
-            });
+    detailInit: function (e) {
+        var detailRow = e.detailRow;
+
+        detailRow.find(".tabstrip").kendoTabStrip({
+            animation: {
+                open: { effects: "fadeIn" }
+            }
+        });
+
+        var qaModel = _.zipObject(e.data.qaModel, _.map(e.data.qaModel, function (ev) { return true }));
+        var model = kendo.observable({
+            id: e.data.id,
+            qamodel: qaModel,
+            save: this.onSaveQAStatus
+        });
+
+        kendo.bind(detailRow.find('.qa-statuses'), model);
+    },
+
+    onSaveQAStatus: function (e) {
+        var model = this.get('qamodel');
+
+        var grid = PantsOctopi.controls.grid;
+
+        var item = grid.dataSource.get(this.get('id'));
+        item.set('qaStatuses', model.toJSON());
+        item.dirty = true;
+
+        PantsOctopi.controls.grid.dataSource.sync();
     },
 
     getEmptyModel: function() {

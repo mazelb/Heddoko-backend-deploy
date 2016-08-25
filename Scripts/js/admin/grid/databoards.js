@@ -194,9 +194,9 @@ var Databoards = {
                             field: "qaStatus",
                             title: i18n.Resources.QAStatus,
                             template: function (e) {
-                                return Format.databoard.qaStatus(e.qaStatus);
+                                return Format.databoard.qaStatus(e.qaStatusText);
                             },
-                            editor: this.qaStatusTypesDDEditor
+                            editor: KendoDS.emptyEditor
                         },
                         {
                             field: 'notes',
@@ -223,6 +223,8 @@ var Databoards = {
                         }
                     ],
                     save: KendoDS.onSave,
+                    detailInit: this.detailInit.bind(this),
+                    detailTemplate: kendo.template($("#databoards-qastatuses-template").html()),
                     dataBound: this.onDataBound
                 })
                 .data("kendoGrid");
@@ -270,15 +272,6 @@ var Databoards = {
             });
     },
 
-    qaStatusTypesDDEditor: function (container, options) {
-        $('<input required data-text-field="text" data-value-field="value" data-value-primitive="true" data-bind="value: ' + options.field + '"/>')
-            .appendTo(container)
-            .kendoDropDownList({
-                autoBind: true,
-                dataSource: Datasources.databoardQAStatusTypes
-            });
-    },
-
     onDataBound: function(e) {
         KendoDS.onDataBound(e);
 
@@ -311,6 +304,37 @@ var Databoards = {
                     $(this).remove();
                 }
             });
+    },
+
+    detailInit: function (e) {
+        var detailRow = e.detailRow;
+
+        detailRow.find(".tabstrip").kendoTabStrip({
+            animation: {
+                open: { effects: "fadeIn" }
+            }
+        });
+
+        var qaModel = _.zipObject(e.data.qaModel, _.map(e.data.qaModel, function (ev) { return true }));
+        var model = kendo.observable({
+            id: e.data.id,
+            qamodel: qaModel,
+            save: this.onSaveQAStatus
+        });
+
+        kendo.bind(detailRow.find('.qa-statuses'), model);
+    },
+
+    onSaveQAStatus: function (e) {
+        var model = this.get('qamodel');
+
+        var grid = Databoards.controls.grid;
+
+        var item = grid.dataSource.get(this.get('id'));
+        item.set('qaStatuses', model.toJSON());
+        item.dirty = true;
+
+        Databoards.controls.grid.dataSource.sync();
     },
 
     getEmptyModel: function() {
