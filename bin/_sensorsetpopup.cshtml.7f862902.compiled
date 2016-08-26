@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/Inventory/_SensorSetPopup.cshtml" hash="32422a0" filehash="fffff012f0040693" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Views_Inventory__SensorSetPopup_cshtml">
+<preserve resultType="2" virtualPath="/Views/Inventory/_SensorSetPopup.cshtml" hash="32422a0" filehash="fffff0101b75ef7e" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Views_Inventory__SensorSetPopup_cshtml">
   <filedeps>
     <filedep name="/Views/Inventory/_SensorSetPopup.cshtml" />
   </filedeps>

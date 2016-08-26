@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/Email/InviteUserEmail.cshtml" hash="32422a0" filehash="ffffd743c025bc3f" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Views_Email_InviteUserEmail_cshtml">
+<preserve resultType="2" virtualPath="/Views/Email/InviteUserEmail.cshtml" hash="32422a0" filehash="ffffd73590494003" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Views_Email_InviteUserEmail_cshtml">
   <filedeps>
     <filedep name="/Views/Email/InviteUserEmail.cshtml" />
   </filedeps>
