@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/Inventory/_Databoards.cshtml" hash="32422a0" filehash="32950e19cbf1" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Views_Inventory__Databoards_cshtml">
+<preserve resultType="2" virtualPath="/Views/Inventory/_Databoards.cshtml" hash="32422a0" filehash="ffffccf63bbc7ac3" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Views_Inventory__Databoards_cshtml">
   <filedeps>
     <filedep name="/Views/Inventory/_Databoards.cshtml" />
   </filedeps>

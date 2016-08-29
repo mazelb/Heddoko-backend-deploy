@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Areas/HelpPage/Views/Help/DisplayTemplates/CollectionModelDescription.cshtml" hash="522cdc70" filehash="251253b71ca6" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Areas_HelpPage_Views_Help_DisplayTemplates_CollectionModelDescription_cshtml">
+<preserve resultType="2" virtualPath="/Areas/HelpPage/Views/Help/DisplayTemplates/CollectionModelDescription.cshtml" hash="522cdc70" filehash="ffffdb29d83eb0b7" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Areas_HelpPage_Views_Help_DisplayTemplates_CollectionModelDescription_cshtml">
   <filedeps>
     <filedep name="/Areas/HelpPage/Views/Help/DisplayTemplates/CollectionModelDescription.cshtml" />
   </filedeps>
