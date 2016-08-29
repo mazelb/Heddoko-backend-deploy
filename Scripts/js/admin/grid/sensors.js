@@ -161,10 +161,9 @@ var Sensors = {
                             editable: false
                         },
                         anatomicalLocation: {
-                            nullable: false,
+                            nullable: true,
                             type: "number",
                             validation: {
-                                required: true,
                                 min: 0,
                                 max: KendoDS.maxInt
                             }
@@ -290,14 +289,6 @@ var Sensors = {
                                 return Format.kit.sensorSet(e);
                             },
                             editor: KendoDS.emptyEditor
-                        },
-                        {
-                            field: "anatomicalLocation",
-                            title: i18n.Resources.AnatomicalLocation,
-                            template: function(e) {
-                                return Format.equipment.anatomicalLocationImg(e.anatomicalLocation);
-                            },
-                            editor: Equipments.anatomicalLocationDDEditor
                         },
                         {
                             field: 'notes',

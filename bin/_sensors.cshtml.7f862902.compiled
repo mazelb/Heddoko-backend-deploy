@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/Inventory/_Sensors.cshtml" hash="32422a0" filehash="1d8aaa70b17d" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Views_Inventory__Sensors_cshtml">
+<preserve resultType="2" virtualPath="/Views/Inventory/_Sensors.cshtml" hash="32422a0" filehash="ffffe28ed6995097" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Views_Inventory__Sensors_cshtml">
   <filedeps>
     <filedep name="/Views/Inventory/_Sensors.cshtml" />
   </filedeps>
