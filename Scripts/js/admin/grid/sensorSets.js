@@ -360,7 +360,7 @@ var SensorSets = {
                         field: "qaStatus",
                         title: i18n.Resources.QAStatus,
                         template: function (e) {
-                            return Format.equipment.equipmentQAStatus(e.qaStatus);
+                            return Format.sensors.qaStatus(e.qaStatusText);
                         },
                         editor: KendoDS.emptyEditor
                     },
