@@ -19,6 +19,16 @@ var PantsOctopi = {
         //Datasources context
         this.pantsOctopi = PantsOctopi.getDatasource();
 
+        this.pantsOctopi.bind("requestEnd", function (e) {
+            switch (e.type) {
+                case "create":
+                case "update":
+                case "destroy":
+                    Datasources.pantsOctopiDD.read();
+                    break;
+            }
+        });
+
         this.pantsOctopiDD = PantsOctopi.getDatasourceDD();
 
         this.pantsOctopiQAStatusTypes = new kendo.data.DataSource({

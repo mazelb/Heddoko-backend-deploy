@@ -19,6 +19,16 @@ var Brainpacks = {
         //Datasources context
         this.brainpacks = Brainpacks.getDatasource();
 
+        this.brainpacks.bind("requestEnd", function (e) {
+            switch (e.type) {
+                case "create":
+                case "update":
+                case "destroy":
+                    Datasources.brainpacksDD.read();
+                    break;
+            }
+        });
+
         this.brainpackQAStatusTypes = new kendo.data.DataSource({
             data: _.values(Enums.BrainpackQAStatusType.array)
         });

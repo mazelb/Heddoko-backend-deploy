@@ -19,6 +19,16 @@ var Powerboards = {
         //Datasources context
         this.powerboards = Powerboards.getDatasource();
 
+        this.powerboards.bind("requestEnd", function (e) {
+            switch (e.type) {
+                case "create":
+                case "update":
+                case "destroy":
+                    Datasources.powerboardsDD.read();
+                    break;
+            }
+        });
+
         this.powerboardsDD = Powerboards.getDatasourceDD();
 
         this.powerboardQAStatusTypes = new kendo.data.DataSource({

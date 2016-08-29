@@ -19,6 +19,16 @@ var Pants = {
         //Datasources context
         this.pants = Pants.getDatasource();
 
+        this.pants.bind("requestEnd", function (e) {
+            switch (e.type) {
+                case "create":
+                case "update":
+                case "destroy":
+                    Datasources.pantsDD.read();
+                    break;
+            }
+        });
+
         this.pantsDD = Pants.getDatasourceDD();
 
         this.pantsQAStatusTypes = new kendo.data.DataSource({

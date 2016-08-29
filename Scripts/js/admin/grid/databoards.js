@@ -19,6 +19,16 @@ var Databoards = {
         //Datasources context
         this.databoards = Databoards.getDatasource();
 
+        this.databoards.bind("requestEnd", function (e) {
+            switch (e.type) {
+                case "create":
+                case "update":
+                case "destroy":
+                    Datasources.databoardsDD.read();
+                    break;
+            }
+        });
+
         this.databoardsDD = Databoards.getDatasourceDD();
 
         this.databoardQAStatusTypes = new kendo.data.DataSource({

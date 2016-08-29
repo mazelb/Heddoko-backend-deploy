@@ -19,6 +19,16 @@ var Shirts = {
         //Datasources context
         this.shirts = Shirts.getDatasource();
 
+        this.shirts.bind("requestEnd", function (e) {
+            switch (e.type) {
+                case "create":
+                case "update":
+                case "destroy":
+                    Datasources.shirtsDD.read();
+                    break;
+            }
+        });
+
         this.shirtsDD = Shirts.getDatasourceDD();
 
         this.shirtQAStatusTypes = new kendo.data.DataSource({

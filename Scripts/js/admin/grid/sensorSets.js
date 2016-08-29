@@ -20,6 +20,16 @@ var SensorSets = {
     datasources: function() {
         this.sensorSets = SensorSets.getDatasource();
 
+        this.sensorSets.bind("requestEnd", function (e) {
+            switch (e.type) {
+                case "create":
+                case "update":
+                case "destroy":
+                    Datasources.sensorSetsDD.read();
+                    break;
+            }
+        });
+
         this.sensorSetsDD = SensorSets.getDatasourceDD();
 
         this.sensorSetQAStatusTypes = new kendo.data.DataSource({
