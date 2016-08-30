@@ -1,24 +1,4 @@
 ﻿var Validator = {
-    materialType: {
-        maxSize: 50,
-        maxLengthValidation: function (input) {
-            return Validator.maxLengthValidation(input, 'identifier', Validator.materialType.maxSize);
-        }
-    },
-    material: {
-        name: {
-            maxSize: 255,
-            maxLengthValidation: function (input) {
-                return Validator.maxLengthValidation(input, 'name', Validator.material.name.maxSize);
-            }
-        },
-        partNo: {
-            maxSize: 255,
-            maxLengthValidation: function (input) {
-                return Validator.maxLengthValidation(input, 'partNo', Validator.material.partNo.maxSize);
-            }
-        }
-    },
     equipment: {
         notes: {
             maxSize: 1024,
@@ -42,6 +22,24 @@
             maxSize: 255,
             maxLengthValidation: function (input) {
                 return Validator.maxLengthValidation(input, 'serialNo', Validator.equipment.serialNo.maxSize);
+            }
+        },
+        location: {
+            maxSize: 255,
+            maxLengthValidation: function (input) {
+                return Validator.maxLengthValidation(input, 'location', Validator.equipment.location.maxSize);
+            }
+        },
+        version: {
+            maxSize: 255,
+            maxLengthValidation: function (input) {
+                return Validator.maxLengthValidation(input, 'name', Validator.equipment.version.maxSize);
+            }
+        },
+        label: {
+            maxSize: 255,
+            maxLengthValidation: function (input) {
+                return Validator.maxLengthValidation(input, 'name', Validator.equipment.label.maxSize);
             }
         }
     },
@@ -90,7 +88,7 @@
                 var result = KendoDS.validateDate(val)
                 if (result) {
                     return result >= kendo.date.today();
-                } 
+                }
 
                 return false;
             }

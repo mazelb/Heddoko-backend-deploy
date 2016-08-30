@@ -50,7 +50,7 @@
   border-top-left-radius: $radius;
 }
 
-@mixin transition( $transition-property: all, $transition-time: .2s, $transition-method: ease ) {
+@mixin transition-full( $transition-property: all, $transition-time: .2s, $transition-method: ease ) {
   -webkit-transition: $transition-property $transition-time $transition-method;
   -moz-transition: $transition-property $transition-time $transition-method;
   -ms-transition: $transition-property $transition-time $transition-method;
@@ -102,4 +102,59 @@
 
 @mixin pointer() {
     cursor: pointer;
+}
+
+
+@mixin transform($transform){
+    -webkit-transform: $transform;
+    -moz-transform: $transform;
+    -ms-transform: $transform;
+    -o-transform: $transform;
+    transform: $transform;
+}
+
+@mixin transition($transition){
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -ms-transition: $transition;
+  -o-transition:$transition;
+  transition: $transition;
+}
+
+@mixin animation($animation){
+  -webkit-animation: $animation;
+  -moz-animation: $animation;
+  -ms-animation: $animation;
+  -o-animation:$animation;
+  animation: $animation;
+}
+
+@mixin box-shadow($box-shadow){
+  -webkit-box-shadow: $box-shadow;
+  -moz-box-shadow: $box-shadow;
+  -ms-box-shadow: $box-shadow;
+  -o-box-shadow: $box-shadow;
+  box-shadow: $box-shadow;
+}
+
+@mixin border-radius($border-radius) {
+    -webkit-border-radius: $border-radius;
+    -moz-border-radius: $border-radius;
+    -ms-border-radius: $border-radius;
+    -o-border-radius: $border-radius;
+    border-radius: $border-radius;
+}
+
+@mixin vendor-prefix($name, $argument) {
+    -webkit-#{$name}: #{$argument};
+    -ms-#{$name}: #{$argument};
+    -moz-#{$name}: #{$argument};
+    -o-#{$name}: #{$argument};
+    #{$name}: #{$argument};
+}
+
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  $opacity-ie: $opacity * 100;
+  filter: alpha(opacity=$opacity-ie); //IE8
 }

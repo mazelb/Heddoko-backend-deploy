@@ -1,12 +1,58 @@
-﻿$tablet_width: 480px;
+﻿//TODO remove them
+$green: #45825A;
+$blue: #2c3a46;
+$dark-blue: #1c242c;
+$light-blue: #506572;
+//$orange: #db5031;
+$orange: #fabd39;
+$light-gray: #c1bfc0;
+$yellow: #fef9d9;
+$dark-brown: #503f3c;
+$warning: #eec95a;
+$danger: #db5031;
+$info-alt: #8170ca;
+$heddoko-green: #3bd6b2;
+$heddokogreen: $heddoko-green;
+$silver: #cbd4e3;
+$orangeaccent: #ff8d46;
+$text-color: #ddd;
+$text-color-blue: #5b707d;
+$background-color: $dark-blue;
+
+$tablet_width: 480px;
 $desktop_width: 1024px;
-$main_font: 'arial';
+$main_font: 'Proxima Nova', sans-serif;
 $body_circle_color: #3bd6b4;
 $login_link: #3bd6b2;
+$heddoko_green: #3bd6b2;
+$heddokogreen: $heddoko_green;
+$body_text_color:#ddd;
+$body_background_color:#1c242c;
+$selection_color:#fff;
+$a_color:#fff;
+$body_landing_color:#333333;
+$footer_color: #fff;
+$header_a_color: #fff;
+$footer_background:rgba(0, 0, 0, 0.5);
+$main_body_color: #fff;
+$h1_color: #fff;
 
-$status-red: #9d2a27;
-$status-yellow: yellow;
-$status-green: #759632;
-$status-black: black;
-$status-orange: #ffc000;
-$status-brown: #c36518;
+$nav_background: #2c3a46;
+$nav_a: #cbd4e3;
+$nav_a_hover: #fef9d9;
+$nav_a_background:  #1c242c;
+
+$form_landing_background: rgba(255, 255, 255, 0.7);
+$form_landing_color: #333;
+$form_landing_a_color: #fff;
+$form_landing_submit_background: rgba(59, 214, 178, 0.7);
+$form_landing_submit_color: #fff;
+$form_landing_a_emphasize:rgb(59, 214, 178);
+
+
+$status_red: #9d2a27;
+$status_yellow: yellow;
+$status_green: #759632;
+$status_black: black;
+$status_orange: #ffc000;
+$status_brown: #c36518;

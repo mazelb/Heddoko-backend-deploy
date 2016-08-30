@@ -1,0 +1,90 @@
+﻿.k-grid {
+    font-size: 14px;
+
+    a {
+        color: #337ab7;
+    }
+
+    a:hover {
+        color: #23527c;
+    }
+}
+
+.margin010 {
+    @include margin-top-10();
+}
+
+.k-datepicker .k-tooltip-validation {
+    position: absolute;
+    top: 24px;
+    left: -1px;
+    white-space: initial;
+}
+
+.k-dropdown .k-tooltip-validation.k-invalid-msg {
+    position: relative;
+}
+
+.k-edit-form-container {
+    min-width: 460px;
+}
+
+.k-popup-edit-form .k-dropzone {
+    padding-top: 0px;
+    padding-left: 0px;
+}
+
+.filters {
+    padding: 10px 0px;
+}
+
+.panel-body .k-dropdown.k-header, .k-autocomplete.k-state-default {
+    background-color: transparent;
+}
+
+.grid-notes {
+    width: 100px;
+}
+
+#ComplexEquipmentPopup {
+    width: 300px;
+    height: 100px;
+}
+
+#ComplexEquipmentPopup .k-autocomplete {
+    width: 100%;
+}
+
+.grid-checkbox {
+    margin-left: 10px;
+    margin-right: 10px;
+
+    input {
+        margin-right: 5px;
+        margin-top: -1px;
+        vertical-align: middle;
+    }
+}
+
+#userLicensesDD {
+    width: 200px;
+}
+
+.notification-info p {
+    font-size: 14px;
+}
+
+.qastatus {
+    > .k-dropdown {
+        width: 300px;
+    }
+}
+
+div.k-edit-form-container {
+    width: 80%;
+    min-width: 600px;
+    
+    .k-edit-field > * {
+        width: 80%;
+    }
+}

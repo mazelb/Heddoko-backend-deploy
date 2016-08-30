@@ -1,0 +1,62 @@
+﻿html {
+}
+
+body {
+    text-rendering: optimizelegibility !important;
+}
+
+@media print {
+  .no-print {
+    display: none;
+  }
+}
+
+h1 {
+    color: $h1_color;
+    font-family: Proxima Nova;
+    font-size: 72px;
+    opacity: 0.8;
+    text-align: center;
+}
+
+#footer {
+    color: $footer_color;
+    padding: 10px;
+    text-transform: uppercase;
+    background-color: $footer_background;
+}
+
+
+.main-body {
+    color: $main_body_color;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    .container {
+        margin-bottom:50px;
+    }
+}
+
+.main-body.signup {
+    margin-bottom: 60px;
+}
+
+::selection {
+    background: $heddoko_green;
+    color: $selection_color;
+}
+
+::-moz-selection {
+    background: $heddoko_green;
+    color: $selection_color;
+}
+
+a {
+    color: $a_color;
+    text-decoration: none;
+    @include transition(all .2s);
+}
+
+a:hover, a:focus {
+    color: $heddoko_green;
+    text-decoration: underline;
+}

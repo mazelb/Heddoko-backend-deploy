@@ -4,4 +4,10 @@
             autoclose: true,
         });
     }
+
+    if ($.fn.slimScroll) {
+        $('#nav').slimScroll({
+            height: '100%'
+        });
+    }
 });

@@ -14,7 +14,7 @@ var Users = {
     },
     datasources: function () {
         //Datasources context
-        this.usersDD = new kendo.data.DataSource({
+        this.usersAdminDD = new kendo.data.DataSource({
             serverPaging: false,
             serverFiltering: false,
             serverSorting: false,
@@ -39,13 +39,40 @@ var Users = {
         });
 
         this.users = Users.getDatasource();
+
+        this.usersDD = Users.getDatasourceDD();
     },
+
+    getDatasourceDD: function (id) {
+        return new kendo.data.DataSource({
+            serverPaging: false,
+            serverFiltering: true,
+            serverSorting: false,
+            transport: KendoDS.buildTransport('/admin/api/users'),
+            schema: {
+                data: "response",
+                total: "total",
+                errors: "Errors",
+                model: {
+                    id: "id"
+                }
+            },
+            filter: [
+                {
+                    field: 'Used',
+                    operator: 'eq',
+                    value: id
+                }
+            ]
+        });
+    },
+
     ddEditor: function (container, options) {
         $('<input required data-text-field="name" data-value-field="id"  data-value-primitive="true" data-bind="value:' + options.field + '"/>')
         .appendTo(container)
         .kendoDropDownList({
             autoBind: true,
-            dataSource: Datasources.usersDD
+            dataSource: Datasources.usersAdminDD
         });
     },
     getDatasource: function () {
@@ -102,7 +129,16 @@ var Users = {
                             }
                         },
                         licenseID: {
-                            nullable: false,
+                            nullable: true,
+                            type: "numer",
+                            validation: {
+                                required: true,
+                                min: 0,
+                                max: KendoDS.maxInt
+                            }
+                        },
+                        kitID: {
+                            nullable: true,
                             type: "numer",
                             validation: {
                                 required: true,
@@ -181,6 +217,13 @@ var Users = {
                         name += ' ' + Format.license.name(e.licenseName);;
 
                         return name;
+                    }
+                }, {
+                    field: 'kitID',
+                    title: i18n.Resources.Kit,
+                    editor: Kits.ddEditor,
+                    template: function (e) {
+                        return Format.user.kit(e);
                     }
                 }, {
                     field: 'status',

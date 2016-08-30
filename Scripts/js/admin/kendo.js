@@ -238,5 +238,12 @@ var KendoDS = {
         else {
             grid.pager.element.show();
         }
+    },
+    resetUpload: function (e) {
+        $(".k-upload-files").remove();
+        $(".k-upload-status").remove();
+        $(".k-upload.k-header").addClass("k-upload-empty");
+        $(".k-upload-button").removeClass("k-state-focused");
+
     }
 };
