@@ -24,6 +24,7 @@ var Sensors = {
                 case "update":
                 case "destroy":
                     Datasources.sensorsDD.read();
+                    Datasources.sensorsLinkDD.read();
                     break;
             }
         });
@@ -59,7 +60,14 @@ var Sensors = {
                 model: {
                     id: "id"
                 }
-            }
+            },
+            filter: [
+                {
+                    field: 'Used',
+                    operator: 'eq',
+                    value: null
+                }
+            ]
         });
     },
 

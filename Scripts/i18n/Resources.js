@@ -407,7 +407,8 @@ i18n.Resources = (function () {
   "InvalidPhone": "Phone number entered is not valid",
   "QAChecklist": "QA Checklist",
   "FilterStatus": "Filter by Status",
-  "Filter": "Filter"
+  "Filter": "Filter",
+  "Software": "Software"
 };
 	return $.extend({}, i18n.Resources || {}, strings);
 }());

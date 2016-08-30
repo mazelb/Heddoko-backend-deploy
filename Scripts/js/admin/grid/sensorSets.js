@@ -31,12 +31,6 @@ var SensorSets = {
         });
 
         this.sensorSetsDD = SensorSets.getDatasourceDD();
-
-        this.sensorSetQAStatusTypes = new kendo.data.DataSource({
-            data: _.values(Enums.SensorSetQAStatusType.array)
-        });
-
-        this.sensorSetQAStatusTypes.read();
     },
 
     getDatasource: function () {
@@ -56,15 +50,6 @@ var SensorSets = {
                         id: {
                             editable: false,
                             nullable: true
-                        },
-                        qaStatus: {
-                            nullable: false,
-                            type: "number",
-                            validation: {
-                                required: true,
-                                min: 0,
-                                max: KendoDS.maxInt
-                            }
                         },
                         kit: {
                             editable: false,
@@ -176,18 +161,10 @@ var SensorSets = {
                     {
                         field: "status",
                         title: i18n.Resources.Status,
-                        template: function (e) {
+                        template: function(e) {
                             return Format.equipment.equipmentStatus(e.status);
                         },
                         editor: Equipments.equipmentStatusDDEditor
-                    },
-                    {
-                        field: "qaStatus",
-                        title: i18n.Resources.QAStatus,
-                        template: function (e) {
-                            return Format.sensorSet.qaStatus(e.qaStatus);
-                        },
-                        editor: this.qaStatusTypesDDEditor
                     },
                     {
                         field: "kit",
@@ -264,6 +241,7 @@ var SensorSets = {
                 .data("kendoWindow");
 
             this.controls.popupModel = kendo.observable({
+                sensorSetID: null,
                 model: this.getEmptyPopupModel(),
                 sensors: Datasources.sensorsLinkDD,
                 link: this.onLink,
@@ -281,15 +259,6 @@ var SensorSets = {
 
             $(".chk-show-deleted", this.controls.grid.element).click(this.onShowDeleted.bind(this));
         }
-    },
-
-    qaStatusTypesDDEditor: function (container, options) {
-        $('<input required data-text-field="text" data-value-field="value" data-value-primitive="true" data-bind="value: ' + options.field + '"/>')
-            .appendTo(container)
-            .kendoDropDownList({
-                autoBind: true,
-                dataSource: Datasources.sensorSetQAStatusTypes
-            });
     },
 
     detailInit: function (e) {
@@ -427,6 +396,7 @@ var SensorSets = {
         var item = Datasources.sensorSets.get(model.id);
         item.set("sensors", model.sensors);
         Datasources.sensorSets.sync();
+        Datasources.sensorsLinkDD.read();
         SensorSets.onClosePopup();
     },
 
@@ -437,6 +407,7 @@ var SensorSets = {
         tr.remove();
 
         Ajax.post("/admin/api/sensors/" + dataItem.id + "/unlink");
+        Datasources.sensorsLinkDD.read();
     },
 
     onDataBound: function (e) {
