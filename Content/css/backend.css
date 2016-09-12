@@ -107,6 +107,10 @@
   cursor: pointer;
   color: #c36518; }
 
+.blue {
+  cursor: pointer;
+  color: #0094ff; }
+
 .k-grid {
   font-size: 14px; }
   .k-grid a {
@@ -171,4 +175,15 @@ div.k-edit-form-container {
   min-width: 600px; }
   div.k-edit-form-container .k-edit-field > * {
     width: 80%; }
+
+.history-popup table {
+  border-collapse: collapse;
+  width: 100%; }
+
+.history-popup th, .history-popup td {
+  padding: 5px;
+  text-align: left; }
+
+.history-popup tr:nth-child(2n) {
+  background-color: #c1bfc0; }
 

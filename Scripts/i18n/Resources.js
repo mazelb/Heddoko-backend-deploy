@@ -408,7 +408,12 @@ i18n.Resources = (function () {
   "QAChecklist": "QA Checklist",
   "FilterStatus": "Filter by Status",
   "Filter": "Filter",
-  "Software": "Software"
+  "Software": "Software",
+  "WrongOldPassword": "Old password is wrong",
+  "Team": "Team",
+  "Teams": "Teams",
+  "History": "History",
+  "Date": "Date"
 };
 	return $.extend({}, i18n.Resources || {}, strings);
 }());

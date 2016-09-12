@@ -1,8 +1,8 @@
 ﻿$(function() {
-    Databoards.init();
+    Teams.init();
 });
 
-var Databoards = {
+var Teams = {
     isDeleted: false,
     controls: {
         form: null,
@@ -17,49 +17,15 @@ var Databoards = {
 
     datasources: function() {
         //Datasources context
-        this.databoards = Databoards.getDatasource();
+        this.teams = Teams.getDatasource();
 
-        this.databoards.bind("requestEnd", function (e) {
-            switch (e.type) {
-                case "create":
-                case "update":
-                case "destroy":
-                    Datasources.databoardsDD.read();
-                    break;
-            }
+        this.teamsDD = Teams.getDatasourceDD();
+
+        this.teamStatusTypes = new kendo.data.DataSource({
+            data: _.values(Enums.TeamStatusType.array)
         });
 
-        this.databoardsDD = Databoards.getDatasourceDD();
-
-        this.databoardQAStatusTypes = new kendo.data.DataSource({
-            data: _.values(Enums.DataboardQAStatusType.array)
-        });
-
-        this.databoardQAStatusTypes.read();
-    },
-
-    getDatasourceDD: function(id) {
-        return new kendo.data.DataSource({
-            serverPaging: false,
-            serverFiltering: true,
-            serverSorting: false,
-            transport: KendoDS.buildTransport('/admin/api/databoards'),
-            schema: {
-                data: "response",
-                total: "total",
-                errors: "Errors",
-                model: {
-                    id: "id"
-                }
-            },
-            filter: [
-                {
-                    field: 'Used',
-                    operator: 'eq',
-                    value: id
-                }
-            ]
-        });
+        this.teamStatusTypes.read();
     },
 
     getDatasource: function() {
@@ -68,7 +34,7 @@ var Databoards = {
             serverPaging: true,
             serverFiltering: true,
             serverSorting: false,
-            transport: KendoDS.buildTransport("/admin/api/databoards"),
+            transport: KendoDS.buildTransport("/admin/api/teams"),
             schema: {
                 data: "response",
                 total: "total",
@@ -80,59 +46,28 @@ var Databoards = {
                             editable: false,
                             nullable: true
                         },
-                        version: {
+                        name: {
                             nullable: false,
                             type: "string",
                             validation: {
                                 required: true,
-                                maxLengthValidation: Validator.equipment.version.maxLengthValidation
+                                maxLengthValidation: Validator.equipment.name.maxLengthValidation
                             }
                         },
-                        firmwareID: {
-                            nullable: true,
-                            type: "number",
-                            validation: {
-                                max: KendoDS.maxInt
-                            }
-                        },
-                        location: {
+                        address: {
                             nullable: false,
                             type: "string",
                             validation: {
                                 required: true,
-                                maxLengthValidation: Validator.equipment.location.maxLengthValidation
-                            }
-                        },
-                        status: {
-                            nullable: false,
-                            type: "number",
-                            validation: {
-                                required: true,
-                                min: 0,
-                                max: KendoDS.maxInt
-                            }
-                        },
-                        label: {
-                            nullable: true,
-                            type: "string",
-                            validation: {
-                                maxLengthValidation: Validator.equipment.label.maxLengthValidation
+                                maxLengthValidation: Validator.organization.address.maxLengthValidation
                             }
                         },
                         notes: {
-                            nullable: true,
+                            nullable: false,
                             type: "string",
                             validation: {
-                                maxLengthValidation: Validator.equipment.notes.maxLengthValidation
-                            }
-                        },
-                        qaStatus: {
-                            nullable: false,
-                            type: "number",
-                            validation: {
                                 required: true,
-                                min: 0,
-                                max: KendoDS.maxInt
+                                maxLengthValidation: Validator.equipment.notes.maxLengthValidation
                             }
                         }
                     }
@@ -141,14 +76,38 @@ var Databoards = {
         });
     },
 
+    getDatasourceDD: function(id) {
+        return new kendo.data.DataSource({
+            serverPaging: false,
+            serverFiltering: true,
+            serverSorting: false,
+            transport: KendoDS.buildTransport("/admin/api/teams"),
+            schema: {
+                data: "response",
+                total: "total",
+                errors: "Errors",
+                model: {
+                    id: "id"
+                },
+            },
+            filter: [
+                {
+                    field: 'Used',
+                    operator: 'eq',
+                    value: id
+                }
+            ]
+        });
+    },
+
     init: function() {
-        var control = $("#databoardsGrid");
-        var filter = $(".databoardsFilter");
-        this.controls.form = $(".databoardsForm");
+        var control = $("#teamsGrid");
+        var filter = $(".teamsFilter");
+        this.controls.form = $(".teamsForm");
 
         if (control.length > 0) {
             this.controls.grid = control.kendoGrid({
-                    dataSource: Datasources.databoards,
+                    dataSource: Datasources.teams,
                     sortable: false,
                     editable: "popup",
                     selectable: false,
@@ -172,45 +131,27 @@ var Databoards = {
                             field: "idView",
                             title: i18n.Resources.ID,
                             editor: KendoDS.emptyEditor
-                        },
-                        {
-                            field: 'label',
-                            title: i18n.Resources.Label
-                        },
-                        {
-                            field: "firmwareID",
-                            title: i18n.Resources.FirmwareVersion,
-                            template: function(e) {
-                                return Format.firmware.version(e);
-                            },
-                            editor: Firmwares.ddEditorDataboards
-                        },
-                        {
-                            field: "version",
-                            title: i18n.Resources.Version
-                        },
-                        {
-                            field: "location",
-                            title: i18n.Resources.PhysicalLocation
+                        }, {
+                            field: 'name',
+                            title: i18n.Resources.Name
+                        }, {
+                            field: 'address',
+                            title: i18n.Resources.Address,
+                            editor: KendoDS.textAreaDDEditor
                         },
                         {
                             field: "status",
                             title: i18n.Resources.Status,
                             template: function(e) {
-                                return Format.equipment.equipmentStatus(e.status);
+                                return Format.team.status(e.status);
                             },
-                            editor: Equipments.equipmentStatusDDEditor
+                            editor: Teams.statusTypesDDEditor
                         }, {
-                            field: "qaStatus",
-                            title: i18n.Resources.QAStatus,
-                            template: function (e) {
-                                return Format.databoard.qaStatus(e.qaStatusText);
-                            },
-                            editor: KendoDS.emptyEditor
-                        },
-                        {
                             field: 'notes',
                             title: i18n.Resources.Notes,
+                            template: function(e) {
+                                return Format.notes(e.notes);
+                            },
                             editor: KendoDS.textAreaDDEditor
                         }, {
                             command: [
@@ -223,10 +164,6 @@ var Databoards = {
                                     text: i18n.Resources.Delete,
                                     className: "k-grid-delete"
                                 }, {
-                                    text: i18n.Resources.History,
-                                    className: "k-grid-history",
-                                    click: this.showHistory
-                                }, {
                                     text: i18n.Resources.Restore,
                                     className: "k-grid-restore",
                                     click: this.onRestore
@@ -237,8 +174,6 @@ var Databoards = {
                         }
                     ],
                     save: KendoDS.onSave,
-                    detailInit: this.detailInit.bind(this),
-                    detailTemplate: kendo.template($("#databoards-qastatuses-template").html()),
                     dataBound: this.onDataBound
                 })
                 .data("kendoGrid");
@@ -256,10 +191,6 @@ var Databoards = {
             this.controls.addModel = kendo.observable({
                 reset: this.onReset.bind(this),
                 submit: this.onAdd.bind(this),
-                sizes: Datasources.sizeTypes,
-                statuses: Datasources.equipmentStatusTypes,
-                firmwares: Datasources.firmwaresDataboards,
-                qaStatuses: Datasources.databoardQAStatusTypes,
                 model: this.getEmptyModel()
             });
 
@@ -268,7 +199,7 @@ var Databoards = {
             this.validators.addModel = this.controls.form.kendoValidator({
                     validateOnBlur: true,
                     rules: {
-                        maxLengthValidationLocation: Validator.equipment.location.maxLengthValidation
+                        maxLengthValidationNotes: Validator.equipment.notes.maxLengthValidation
                     }
                 })
                 .data("kendoValidator");
@@ -277,26 +208,17 @@ var Databoards = {
         }
     },
 
-    ddEditor: function(container, options) {
-        $('<input required data-text-field="name" data-value-field="id" data-value-primitive="true" data-bind="value: ' + options.field + '"/>')
-            .appendTo(container)
-            .kendoDropDownList({
-                autoBind: true,
-                dataSource: Databoards.getDatasourceDD(options.model.id)
-            });
-    },
-
     onDataBound: function(e) {
         KendoDS.onDataBound(e);
 
-        var grid = Databoards.controls.grid;
-        var enumarable = Enums.EquipmentStatusType.enum;
+        var grid = Teams.controls.grid;
+        var enumarable = Enums.TeamStatusType.enum;
 
         $(".k-grid-delete", grid.element)
             .each(function() {
                 var currentDataItem = grid.dataItem($(this).closest("tr"));
 
-                if (currentDataItem.status === enumarable.Trash) {
+                if (currentDataItem.status === enumarable.Deleted) {
                     $(this).remove();
                 }
             });
@@ -305,7 +227,7 @@ var Databoards = {
             .each(function() {
                 var currentDataItem = grid.dataItem($(this).closest("tr"));
 
-                if (currentDataItem.status === enumarable.Trash) {
+                if (currentDataItem.status === enumarable.Deleted) {
                     $(this).remove();
                 }
             });
@@ -314,52 +236,36 @@ var Databoards = {
             .each(function() {
                 var currentDataItem = grid.dataItem($(this).closest("tr"));
 
-                if (currentDataItem.status !== enumarable.Trash) {
+                if (currentDataItem.status === enumarable.Active) {
                     $(this).remove();
                 }
             });
     },
 
-    detailInit: function (e) {
-        var detailRow = e.detailRow;
-
-        detailRow.find(".tabstrip").kendoTabStrip({
-            animation: {
-                open: { effects: "fadeIn" }
-            }
-        });
-
-        var qaModel = _.zipObject(e.data.qaModel, _.map(e.data.qaModel, function (ev) { return true }));
-        var model = kendo.observable({
-            id: e.data.id,
-            qamodel: qaModel,
-            save: this.onSaveQAStatus
-        });
-
-        kendo.bind(detailRow.find('.qa-statuses'), model);
+    ddEditor: function(container, options) {
+        $('<input required data-text-field="nameView" data-value-field="id" data-value-primitive="true" data-bind="value: ' + options.field + '"/>')
+            .appendTo(container)
+            .kendoDropDownList({
+                autoBind: true,
+                dataSource: Teams.getDatasourceDD(options.model.id)
+            });
     },
 
-    onSaveQAStatus: function (e) {
-        var model = this.get('qamodel');
-
-        var grid = Databoards.controls.grid;
-
-        var item = grid.dataSource.get(this.get('id'));
-        item.set('qaStatuses', model.toJSON());
-        item.dirty = true;
-
-        Databoards.controls.grid.dataSource.sync();
+    statusTypesDDEditor: function(container, options) {
+        $('<input required data-text-field="text" data-value-field="value" data-value-primitive="true" data-bind="value: ' + options.field + '"/>')
+            .appendTo(container)
+            .kendoDropDownList({
+                autoBind: true,
+                dataSource: Datasources.kitStatusTypes
+            });
     },
 
     getEmptyModel: function() {
         return {
-            version: null,
-            firmwareID: null,
-            location: null,
-            status: null,
-            qaStatus: null,
-            label: null,
-            notes: null
+            name: null,
+            address: null,
+            notes: null,
+            status: Enums.TeamStatusType.Active
         };
     },
 
@@ -369,20 +275,15 @@ var Databoards = {
     },
 
     onRestore: function(e) {
-        var grid = Databoards.controls.grid;
+        var grid = Teams.controls.grid;
 
         var item = grid.dataItem($(e.currentTarget).closest("tr"));
-        item.set("status", Enums.EquipmentStatusType.enum.Ready);
+        item.set("status", Enums.TeamStatusType.enum.Active);
         grid.dataSource.sync();
     },
 
     onReset: function(e) {
         this.controls.addModel.set("model", this.getEmptyModel());
-    },
-
-    showHistory: function (e) {
-        var item = Databoards.controls.grid.dataItem($(e.currentTarget).closest("tr"));
-        HistoryPopup.show('databoards/history/' + item.id)
     },
 
     onAdd: function(e) {
@@ -395,6 +296,7 @@ var Databoards = {
             this.controls.grid.dataSource.one("requestEnd",
                 function(ev) {
                     if (ev.type === "create" && !ev.response.Errors) {
+                        Datasources.teamsDD.read();
                         this.onReset();
                     }
                 }.bind(this));
@@ -440,4 +342,4 @@ var Databoards = {
     }
 };
 
-Datasources.bind(Databoards.datasources);
+Datasources.bind(Teams.datasources);

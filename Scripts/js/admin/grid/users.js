@@ -154,6 +154,15 @@ var Users = {
                                 min: 0,
                                 max: KendoDS.maxInt
                             }
+                        },
+                        teamID: {
+                            nullable: true,
+                            type: "numer",
+                            validation: {
+                                required: true,
+                                min: 0,
+                                max: KendoDS.maxInt
+                            }
                         }
                     }
                 }
@@ -224,6 +233,13 @@ var Users = {
                     editor: Kits.ddEditor,
                     template: function (e) {
                         return Format.user.kit(e);
+                    }
+                }, {
+                    field: 'teamID',
+                    title: i18n.Resources.Team,
+                    editor: Teams.ddEditor,
+                    template: function (e) {
+                        return Format.user.team(e);
                     }
                 }, {
                     field: 'status',
