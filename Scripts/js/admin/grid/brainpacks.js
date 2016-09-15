@@ -416,7 +416,7 @@ var Brainpacks = {
 
     showHistory: function (e) {
         var item = Brainpacks.controls.grid.dataItem($(e.currentTarget).closest("tr"));
-        HistoryPopup.show('brainpacks/history/' + item.id)
+        HistoryPopup.show('brainpacks/history/' + item.id);
     },
 
     onAdd: function(e) {

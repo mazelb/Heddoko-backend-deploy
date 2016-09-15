@@ -233,7 +233,7 @@ var Organizations = {
 
             $('.chk-show-deleted', this.controls.grid.element).click(this.onShowDeleted.bind(this));
 
-            $(document).on("click", ".k-overlay", $.proxy(this.onClosePopup, this));
+            $(document).on("click", ".k-overlay", this.onClosePopup.bind(this));
 
             this.controls.popup = popup.kendoWindow({
                 title: i18n.Resources.Manage + " " + i18n.Resources.Admin,

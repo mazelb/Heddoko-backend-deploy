@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/Organization/_Licenses.cshtml" hash="32422a0" filehash="ffffc3768d357877" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Views_Organization__Licenses_cshtml">
+<preserve resultType="2" virtualPath="/Views/Organization/_Licenses.cshtml" hash="32422a0" filehash="3c3cfe4935b3" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Views_Organization__Licenses_cshtml">
   <filedeps>
     <filedep name="/Views/Organization/_Licenses.cshtml" />
   </filedeps>

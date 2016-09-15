@@ -4,15 +4,15 @@
 
 var HistoryPopup = {
     popup: null,
-
+    popupHistory: null, 
     show: function (url) {
-        Ajax.get("/admin/api/" + url).success(this.onShowHistory);
+        Ajax.get("/admin/api/" + url).success(this.onShowHistory.bind(this));
     },
 
     init: function () {
-        var historyPopup = $('#notesHistoryPopup');
+        this.popupHistory = $('#notesHistoryPopup');
 
-        this.popup = historyPopup.kendoWindow({
+        this.popup = this.popupHistory.kendoWindow({
             title: i18n.Resources.Notes + " " + i18n.Resources.History,
             modal: true,
             pinned: true,
@@ -26,13 +26,11 @@ var HistoryPopup = {
     },
 
     onShowHistory: function (e) {
-        var viewModel = new Array();
-
         var historyPopupModel = kendo.observable({
             notes: e.response
         });
 
-        kendo.bind($("#notesHistoryPopup"), historyPopupModel);
+        kendo.bind(this.popupHistory, historyPopupModel);
         HistoryPopup.popup.open().center();
     }
 };
