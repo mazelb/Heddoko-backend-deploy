@@ -1,4 +1,4 @@
-﻿$(function() {
+﻿$(function () {
     PantsOctopi.init();
 });
 
@@ -15,7 +15,7 @@ var PantsOctopi = {
         modelValidator: null
     },
 
-    datasources: function() {
+    datasources: function () {
         //Datasources context
         this.pantsOctopi = PantsOctopi.getDatasource();
 
@@ -38,7 +38,7 @@ var PantsOctopi = {
         this.pantsOctopiQAStatusTypes.read();
     },
 
-    getDatasourceDD: function(id) {
+    getDatasourceDD: function (id) {
         return new kendo.data.DataSource({
             serverPaging: false,
             serverFiltering: true,
@@ -62,7 +62,7 @@ var PantsOctopi = {
         });
     },
 
-    getDatasource: function() {
+    getDatasource: function () {
         return new kendo.data.DataSource({
             pageSize: KendoDS.pageSize,
             serverPaging: true,
@@ -134,7 +134,7 @@ var PantsOctopi = {
         });
     },
 
-    init: function() {
+    init: function () {
         var control = $("#pantsOctopiGrid");
         var filter = $('.pantsOctopiFilter');
         var model = $('.pantsOctopiForm');
@@ -173,7 +173,7 @@ var PantsOctopi = {
                     {
                         field: 'size',
                         title: i18n.Resources.Size,
-                        template: function(e) {
+                        template: function (e) {
                             return Format.equipment.size(e.size);
                         },
                         editor: Equipments.sizeDDEditor
@@ -185,7 +185,7 @@ var PantsOctopi = {
                     {
                         field: 'status',
                         title: i18n.Resources.Status,
-                        template: function(e) {
+                        template: function (e) {
                             return Format.equipment.equipmentStatus(e.status);
                         },
                         editor: Equipments.equipmentStatusDDEditor
@@ -211,6 +211,10 @@ var PantsOctopi = {
                                 name: "destroy",
                                 text: i18n.Resources.Delete,
                                 className: "k-grid-delete"
+                            }, {
+                                text: i18n.Resources.History,
+                                className: "k-grid-history",
+                                click: this.showHistory
                             }, {
                                 text: i18n.Resources.Restore,
                                 className: "k-grid-restore",
@@ -250,25 +254,25 @@ var PantsOctopi = {
             kendo.bind(model, this.controls.addModel);
 
             this.validators.addModel = model.kendoValidator({
-                    validateOnBlur: true,
-                    rules: {
-                        maxLengthValidationLocation: Validator.equipment.location.maxLengthValidation
-                    }
-                })
+                validateOnBlur: true,
+                rules: {
+                    maxLengthValidationLocation: Validator.equipment.location.maxLengthValidation
+                }
+            })
                 .data("kendoValidator");
 
             $('.chk-show-deleted', this.controls.grid.element).click(this.onShowDeleted.bind(this));
         }
     },
 
-    onDataBound: function(e) {
+    onDataBound: function (e) {
         KendoDS.onDataBound(e);
 
         var grid = PantsOctopi.controls.grid;
         var enumarable = Enums.EquipmentStatusType.enum;
 
         $(".k-grid-delete", grid.element)
-            .each(function() {
+            .each(function () {
                 var currentDataItem = grid.dataItem($(this).closest("tr"));
 
                 if (currentDataItem.status === enumarable.Trash) {
@@ -277,7 +281,7 @@ var PantsOctopi = {
             });
 
         $(".k-grid-edit", grid.element)
-            .each(function() {
+            .each(function () {
                 var currentDataItem = grid.dataItem($(this).closest("tr"));
 
                 if (currentDataItem.status === enumarable.Trash) {
@@ -286,7 +290,7 @@ var PantsOctopi = {
             });
 
         $(".k-grid-restore", grid.element)
-            .each(function() {
+            .each(function () {
                 var currentDataItem = grid.dataItem($(this).closest("tr"));
 
                 if (currentDataItem.status !== enumarable.Trash) {
@@ -296,7 +300,7 @@ var PantsOctopi = {
 
     },
 
-    ddEditor: function(container, options) {
+    ddEditor: function (container, options) {
         $('<input required data-text-field="name" data-value-field="id" data-value-primitive="true" data-bind="value: ' + options.field + '"/>')
             .appendTo(container)
             .kendoDropDownList({
@@ -336,7 +340,7 @@ var PantsOctopi = {
         PantsOctopi.controls.grid.dataSource.sync();
     },
 
-    getEmptyModel: function() {
+    getEmptyModel: function () {
         return {
             size: null,
             location: null,
@@ -346,22 +350,27 @@ var PantsOctopi = {
             notes: null
         };
     },
-    onShowDeleted: function(e) {
+    onShowDeleted: function (e) {
         this.isDeleted = $(e.currentTarget).prop('checked');
         this.onFilter();
     },
 
-    onRestore: function(e) {
+    onRestore: function (e) {
         var item = PantsOctopi.controls.grid.dataItem($(e.currentTarget).closest("tr"));
         item.set('status', Enums.EquipmentStatusType.enum.Ready);
         PantsOctopi.controls.grid.dataSource.sync();
     },
 
-    onReset: function(e) {
+    showHistory: function (e) {
+        var item = PantsOctopi.controls.grid.dataItem($(e.currentTarget).closest("tr"));
+        HistoryPopup.show('pantsoctopi/history/' + item.id);
+    },
+
+    onReset: function (e) {
         this.controls.addModel.set('model', this.getEmptyModel());
     },
 
-    onAdd: function(e) {
+    onAdd: function (e) {
         Notifications.clear();
         if (this.validators.addModel.validate()) {
             var obj = this.controls.addModel.get('model');
@@ -369,7 +378,7 @@ var PantsOctopi = {
             this.controls.grid.dataSource.add(obj);
             this.controls.grid.dataSource.sync();
             this.controls.grid.dataSource.one('requestEnd',
-                function(e) {
+                function (e) {
                     if (e.type === "create" && !e.response.Errors) {
                         this.onReset();
                     }
@@ -377,20 +386,20 @@ var PantsOctopi = {
         }
     },
 
-    onEnter: function(e) {
+    onEnter: function (e) {
         if (e.keycode === kendo.keys.ENTER) {
             this.onFilter(e);
         }
     },
 
-    onFilter: function(e) {
+    onFilter: function (e) {
         var filters = this.buildFilter();
         if (filters) {
             this.controls.grid.dataSource.filter(filters);
         }
     },
 
-    buildFilter: function(search) {
+    buildFilter: function (search) {
         Notifications.clear();
         search = this.controls.filterModel.search;
 

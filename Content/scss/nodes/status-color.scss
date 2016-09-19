@@ -27,3 +27,8 @@
       @include pointer();
       color: $status-brown;
 }
+
+.blue {
+    @include pointer();
+    color: $status-blue;
+}

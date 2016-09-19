@@ -1,0 +1,14 @@
+﻿.history-popup {    
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        padding: 5px;
+        text-align: left;
+    }
+    tr:nth-child(2n) {
+        background-color: $light-gray;
+    }
+}

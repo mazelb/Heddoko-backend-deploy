@@ -33,13 +33,19 @@
         version: {
             maxSize: 255,
             maxLengthValidation: function (input) {
-                return Validator.maxLengthValidation(input, 'name', Validator.equipment.version.maxSize);
+                return Validator.maxLengthValidation(input, 'version', Validator.equipment.version.maxSize);
             }
         },
         label: {
             maxSize: 255,
             maxLengthValidation: function (input) {
-                return Validator.maxLengthValidation(input, 'name', Validator.equipment.label.maxSize);
+                return Validator.maxLengthValidation(input, 'label', Validator.equipment.label.maxSize);
+            }
+        },
+        name: {
+            maxSize: 255,
+            maxLengthValidation: function (input) {
+                return Validator.maxLengthValidation(input, 'name', Validator.equipment.name.maxSize);
             }
         }
     },

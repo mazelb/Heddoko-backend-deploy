@@ -190,6 +190,10 @@ var SensorSets = {
                                 text: i18n.Resources.Delete,
                                 className: "k-grid-delete"
                             }, {
+                                text: i18n.Resources.History,
+                                className: "k-grid-history",
+                                click: this.showHistory
+                            }, {
                                 text: i18n.Resources.Restore,
                                 className: "k-grid-restore",
                                 click: this.onRestore
@@ -225,7 +229,7 @@ var SensorSets = {
 
             kendo.bind(model, this.controls.addModel);
 
-            $(document).on("click", ".k-overlay", $.proxy(this.onClosePopup, this));
+            $(document).on("click", ".k-overlay", this.onClosePopup.bind(this));
 
             this.controls.popup = popup.kendoWindow({
                 title: i18n.Resources.Link + " " + i18n.Resources.Sensors,
@@ -487,6 +491,11 @@ var SensorSets = {
 
     onReset: function (e) {
         this.controls.addModel.set("model", this.getEmptyModel());
+    },
+
+    showHistory: function (e) {
+        var item = SensorSets.controls.grid.dataItem($(e.currentTarget).closest("tr"));
+        HistoryPopup.show('sensorSets/history/' + item.id)
     },
 
     onAdd: function (e) {
