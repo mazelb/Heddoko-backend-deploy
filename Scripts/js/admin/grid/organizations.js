@@ -189,6 +189,10 @@ var Organizations = {
                                 text: i18n.Resources.Restore,
                                 className: "k-grid-restore",
                                 click: this.onRestore
+                            }, {
+                                text: i18n.Resources.Approve,
+                                className: "k-grid-approve",
+                                click: this.onApprove
                             }
                         ],
                         title: i18n.Resources.Actions,
@@ -401,10 +405,19 @@ var Organizations = {
             .each(function () {
                 var currentDataItem = Organizations.controls.grid.dataItem($(this).closest("tr"));
 
-                if (currentDataItem.status === Enums.OrganizationStatusType.enum.Active) {
+                if (currentDataItem.status !== Enums.OrganizationStatusType.enum.Deleted) {
                     $(this).remove();
                 }
             });
+
+        $(".k-grid-approve", Organizations.controls.grid.element)
+          .each(function () {
+              var currentDataItem = Organizations.controls.grid.dataItem($(this).closest("tr"));
+
+              if (currentDataItem.status !== Enums.OrganizationStatusType.enum.Pending) {
+                  $(this).remove();
+              }
+          });
 
     },
     onShowDeleted: function (e) {
@@ -412,9 +425,21 @@ var Organizations = {
         this.onFilter();
     },
     onRestore: function (e) {
+        e.preventDefault();
+
         var item = Organizations.controls.grid.dataItem($(e.currentTarget).closest("tr"));
         item.set('status', Enums.OrganizationStatusType.enum.Active);
         Organizations.controls.grid.dataSource.sync();
+    },
+    onApprove: function (e) {
+        e.preventDefault();
+
+        var item = Organizations.controls.grid.dataItem($(e.currentTarget).closest("tr"));
+
+        Ajax.post("/admin/api/organizations/approve",
+       {
+           organizationID: item.id
+       }).success(this.onApproveSuccess);
     },
     onReset: function (e) {
         this.controls.addModel.set('model', this.getEmptyModel());
@@ -507,7 +532,14 @@ var Organizations = {
             userID: userID
         }).success(this.onChangeSuccess);
     },
-    onChangeSuccess: function(e) {
+    onApproveSuccess: function(e) {
+        if (e) {
+            Datasources.organizations.read();
+        } else {
+            Notifications.error(e);
+        }
+    },
+    onChangeSuccess: function (e) {
         if (e) {
             Datasources.organizations.read();
         } else {

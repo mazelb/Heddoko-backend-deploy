@@ -94,7 +94,7 @@ i18n.Resources = (function () {
   "UsernameSuccessufullySent": "We have sent an email with your username.",
   "EmailUsed": "Email already used",
   "UsernameUsed": "Username already used",
-  "UserSignupMessage": "User have been created. We have sent email with activation link, please activate your account.",
+  "UserSignupMessage": "User have been created. We have sent request to administration, please check when your account will be approved",
   "And": "and",
   "Privacy": "privacy policy",
   "SignInInviteMessage": "Already have an account?",
@@ -413,7 +413,15 @@ i18n.Resources = (function () {
   "Team": "Team",
   "Teams": "Teams",
   "History": "History",
-  "Date": "Date"
+  "Date": "Date",
+  "Guide": "Guide",
+  "Requirements": "Requirements",
+  "UserIsNotApproved": "User is not approved",
+  "Approve": "Approve",
+  "CantChangeInvite": "You can't change invite status",
+  "CantChangePending": "You can't change pending status",
+  "CantSetInvite": "You can't set invite status",
+  "CantSetPending": "You can't set pending status"
 };
 	return $.extend({}, i18n.Resources || {}, strings);
 }());
