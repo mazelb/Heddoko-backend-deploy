@@ -267,7 +267,7 @@ var Firmwares = {
             });
     },
 
-    ddEditorBrainpack: function(container, options) {
+    ddEditorBrainpacks: function(container, options) {
         $('<input required data-text-field="name" data-value-field="id" data-value-primitive="true" data-bind="value: ' + options.field + '"/>')
             .appendTo(container)
             .kendoDropDownList({

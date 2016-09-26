@@ -190,7 +190,7 @@
                 var div = '<div class="">';
                 div += i18n.Resources.ID + ': <b>' + item.pantsOctopi.idView + '</b><br/>';
                 div += i18n.Resources.Size + ': <b>' + Format.equipment.size(item.pantsOctopi.size) + '</b><br/>';
-                div += i18n.Resources.PhysicalLocation + ': <b>' + item.pantsOctopi.location + '</b><br/>';
+                div += i18n.Resources.Label + ': <b>' + item.pantsOctopi.label + '</b><br/>';
                 div += "</div>";
                 return div;
             }
@@ -213,7 +213,7 @@
                 var div = '<div class="">';
                 div += i18n.Resources.ID + ': <b>' + item.shirtsOctopi.idView + '</b><br/>';
                 div += i18n.Resources.Size + ': <b>' + Format.equipment.size(item.shirtsOctopi.size) + '</b><br/>';
-                div += i18n.Resources.PhysicalLocation + ': <b>' + item.shirtsOctopi.location + '</b><br/>';
+                div += i18n.Resources.Label + ': <b>' + item.shirtsOctopi.label + '</b><br/>';
                 div += "</div>";
                 return div;
             }
@@ -311,8 +311,8 @@
         brainpack: function (item) {
             if (item.brainpack) {
                 var div = '<div class="">';
+                div += i18n.Resources.Label + ": <b>" + item.brainpack.label + "</b><br/>";
                 div += i18n.Resources.ID + ": <b>" + item.brainpack.idView + "</b><br/>";
-                div += i18n.Resources.Version + ": <b>" + item.brainpack.version + "</b><br/>";
                 div += "</div>";
                 return div;
             }
@@ -322,6 +322,7 @@
             if (item.sensorSet) {
                 var div = '<div class="">';
                 div += i18n.Resources.ID + ": <b>" + item.sensorSet.idView + "</b><br/>";
+                div += i18n.Resources.Label + ": <b>" + item.sensorSet.label + "</b><br/>";
                 //TODO add aditional sensorSet fields if needed
                 div += "</div>";
                 return div;
@@ -332,7 +333,8 @@
             if (item.pants) {
                 var div = '<div class="">';
                 div += i18n.Resources.ID + ": <b>" + item.pants.idView + "</b><br/>";
-                div += i18n.Resources.Size + ': <b>' + Format.equipment.size(item.pants.size) + '</b><br/>';
+                div += i18n.Resources.Label + ': <b>' + item.pants.label + '</b><br/>';
+                div += ': <b>' + Format.equipment.size(item.pants.size) + '</b><br/>';
                 div += "</div>";
                 return div;
             }
@@ -342,7 +344,7 @@
             if (item.shirt) {
                 var div = '<div class="">';
                 div += i18n.Resources.ID + ": <b>" + item.shirt.idView + "</b><br/>";
-                div += i18n.Resources.Size + ': <b>' + Format.equipment.size(item.shirt.size) + '</b><br/>';
+                div += i18n.Resources.Label + ': <b>' + item.shirt.label + '</b><br/>';
                 div += "</div>";
                 return div;
             }
