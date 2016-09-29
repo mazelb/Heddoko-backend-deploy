@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/Shared/_LayoutEmail.cshtml" hash="fffffffff9e71233" filehash="fffff77fec0d383d" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Views_Shared__LayoutEmail_cshtml">
+<preserve resultType="2" virtualPath="/Views/Shared/_LayoutEmail.cshtml" hash="fffffffff9e71233" filehash="70fe5a4b895" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Views_Shared__LayoutEmail_cshtml">
   <filedeps>
     <filedep name="/Views/Shared/_LayoutEmail.cshtml" />
   </filedeps>

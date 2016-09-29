@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/Shared/_NavigationAdmin.cshtml" hash="fffffffff9e71233" filehash="ffffcbae1fdb2d1c" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Views_Shared__NavigationAdmin_cshtml">
+<preserve resultType="2" virtualPath="/Views/Shared/_NavigationAdmin.cshtml" hash="fffffffff9e71233" filehash="ffffcc97f9f0056c" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Views_Shared__NavigationAdmin_cshtml">
   <filedeps>
     <filedep name="/Views/Shared/_NavigationAdmin.cshtml" />
   </filedeps>
