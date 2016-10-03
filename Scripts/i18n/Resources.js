@@ -413,7 +413,8 @@ i18n.Resources = (function () {
   "Team": "Team",
   "Teams": "Teams",
   "History": "History",
-  "Date": "Date"
+  "Date": "Date",
+  "LicenseIsNotReady": "License is not assigned on your. Please notify organization admin."
 };
 	return $.extend({}, i18n.Resources || {}, strings);
 }());
