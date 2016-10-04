@@ -414,6 +414,7 @@ i18n.Resources = (function () {
   "Teams": "Teams",
   "History": "History",
   "Date": "Date",
+  "LicenseIsNotReady": "License is not assigned on you. Please notify organization admin.",
   "Guide": "Guide",
   "Requirements": "Requirements",
   "UserIsNotApproved": "User is not approved",
