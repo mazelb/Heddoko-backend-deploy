@@ -414,7 +414,7 @@ i18n.Resources = (function () {
   "Teams": "Teams",
   "History": "History",
   "Date": "Date",
-  "LicenseIsNotReady": "License is not assigned on your. Please notify organization admin."
+  "LicenseIsNotReady": "License is not assigned on you. Please notify organization admin."
 };
 	return $.extend({}, i18n.Resources || {}, strings);
 }());

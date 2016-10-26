@@ -482,7 +482,7 @@ var SensorSets = {
     },
 
     onRestore: function (e) {
-        var grid = Sensors.controls.grid;
+        var grid = SensorSets.controls.grid;
 
         var item = grid.dataItem($(e.currentTarget).closest("tr"));
         item.set("status", Enums.EquipmentStatusType.enum.Ready);
