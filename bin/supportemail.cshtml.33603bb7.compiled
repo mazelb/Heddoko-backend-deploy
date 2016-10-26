@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/Email/SupportEmail.cshtml" hash="32422a0" filehash="ffffe120031382ab" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Views_Email_SupportEmail_cshtml">
-  <filedeps>
-    <filedep name="/Views/Email/SupportEmail.cshtml" />
-  </filedeps>
-</preserve>

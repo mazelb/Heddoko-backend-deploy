@@ -422,7 +422,21 @@ i18n.Resources = (function () {
   "CantChangeInvite": "You can't change invite status",
   "CantChangePending": "You can't change pending status",
   "CantSetInvite": "You can't set invite status",
-  "CantSetPending": "You can't set pending status"
+  "CantSetPending": "You can't set pending status",
+  "WrongLockedOut": "You have been locked out.",
+  "RequiresVerification": "RequiresVerification",
+  "WrongConfirm": "Email is not confirmed. <a href=\"{0}\">Resend</a> activation email for user {1}",
+  "UserDoesntExist": "User doesn't exist",
+  "Analyst": "Analyst",
+  "LicenseAdmin": "License Admin",
+  "Worker": "Worker",
+  "EmailHasBeenSent": "Email has been sent",
+  "ActivationEmailHasBeenSentCheckEmail": "Activation email has been successfully sent, please check your email",
+  "ResendActivation": "Resend activation",
+  "UserIsNotInvited": "User should be invited",
+  "UserDoesntHaveKit": "User should have a kit",
+  "UserIsNotInTeam": "User should be in a team",
+  "WrongTeam": "User is in the wrong team"
 };
 	return $.extend({}, i18n.Resources || {}, strings);
 }());

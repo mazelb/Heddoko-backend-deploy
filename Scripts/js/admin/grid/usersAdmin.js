@@ -74,13 +74,17 @@ var UsersAdmin = {
                         name: "edit",
                         text: i18n.Resources.Edit,
                         className: "k-grid-edit"
+                    }, {
+                        text: i18n.Resources.ResendActivation,
+                        className: "k-grid-resend",
+                        click: this.onResendActivation.bind(this)
                     }],
                     title: i18n.Resources.Actions,
                     width: '165px'
                 }
                 ],
                 save: KendoDS.onSave,
-                dataBound: KendoDS.onDataBound
+                dataBound: this.onDataBound
             }).data("kendoGrid");
 
             KendoDS.bind(this.controls.grid, true);
@@ -122,5 +126,35 @@ var UsersAdmin = {
         }
 
         return filters.length == 0 ? {} : filters;
+    },
+    onDataBound: function (e) {
+        KendoDS.onDataBound(e);
+
+        $(".k-grid-resend", UsersAdmin.controls.grid.element)
+          .each(function () {
+              var currentDataItem = UsersAdmin.controls.grid.dataItem($(this).closest("tr"));
+
+              if (currentDataItem.status !== Enums.UserStatusType.enum.Invited) {
+                  $(this).remove();
+              }
+          });
+
+    },
+    onResendActivation: function (e) {
+        e.preventDefault();
+
+        var item = UsersAdmin.controls.grid.dataItem($(e.currentTarget).closest("tr"));
+
+        Ajax.post("/admin/api/users/activation/resend",
+       {
+           userId: item.id
+       }).success(this.onResendActivationSuccess);
+    },
+    onResendActivationSuccess: function(e) {
+        if (e) {
+            Notifications.info(i18n.Resources.EmailHasBeenSent);
+        } else {
+            Notifications.error(i18n.Resources.Error);
+        }
     }
 };

@@ -192,7 +192,7 @@ var Organizations = {
                             }, {
                                 text: i18n.Resources.Approve,
                                 className: "k-grid-approve",
-                                click: this.onApprove
+                                click: this.onApprove.bind(this)
                             }
                         ],
                         title: i18n.Resources.Actions,
@@ -535,6 +535,7 @@ var Organizations = {
     onApproveSuccess: function(e) {
         if (e) {
             Datasources.organizations.read();
+            Datasources.users.read();
         } else {
             Notifications.error(e);
         }

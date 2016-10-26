@@ -261,6 +261,10 @@ var Users = {
                         text: i18n.Resources.Restore,
                         className: "k-grid-restore",
                         click: this.onRestore
+                    }, {
+                        text: i18n.Resources.ResendActivation,
+                        className: "k-grid-resend",
+                        click: this.onResendActivation.bind(this)
                     }],
                     title: i18n.Resources.Actions,
                     width: '165px'
@@ -336,6 +340,16 @@ var Users = {
                 }
             }
         });
+
+        $(".k-grid-resend", Users.controls.grid.element)
+          .each(function () {
+              var currentDataItem = Users.controls.grid.dataItem($(this).closest("tr"));
+
+              if (currentDataItem.status !== Enums.UserStatusType.enum.Invited) {
+                  $(this).remove();
+              }
+          });
+
     },
     onShowDeleted: function (e) {
         this.isDeleted = $(e.currentTarget).prop('checked');
@@ -345,6 +359,23 @@ var Users = {
         var item = Users.controls.grid.dataItem($(e.currentTarget).closest("tr"));
         item.set('status', Enums.UserStatusType.enum.Active);
         Users.controls.grid.dataSource.sync();
+    },
+    onResendActivation: function (e) {
+        e.preventDefault();
+
+        var item = Users.controls.grid.dataItem($(e.currentTarget).closest("tr"));
+
+        Ajax.post("/admin/api/users/activation/resend",
+       {
+           userId: item.id
+       }).success(this.onResendActivationSuccess);
+    },
+    onResendActivationSuccess: function (e) {
+        if (e) {
+            Notifications.info(i18n.Resources.EmailHasBeenSent);
+        } else {
+            Notifications.error(i18n.Resources.Error);
+        }
     },
     statusDDEditor: function (container, options) {
         $('<input required data-text-field="text" data-value-field="value"  data-value-primitive="true" data-bind="value:' + options.field + '"/>')

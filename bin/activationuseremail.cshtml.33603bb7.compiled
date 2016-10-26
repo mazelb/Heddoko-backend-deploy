@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/Email/ActivationUserEmail.cshtml" hash="32422a0" filehash="fffff10c0b30ffa6" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Views_Email_ActivationUserEmail_cshtml">
-  <filedeps>
-    <filedep name="/Views/Email/ActivationUserEmail.cshtml" />
-  </filedeps>
-</preserve>

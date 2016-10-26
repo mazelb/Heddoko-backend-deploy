@@ -164,7 +164,7 @@ var Sensors = {
                                 max: KendoDS.maxInt
                             }
                         },
-                        sensorSet: {
+                        sensorSetID: {
                             nullable: true,
                             editable: false
                         },
@@ -291,7 +291,7 @@ var Sensors = {
                             editor: KendoDS.emptyEditor
                         },
                         {
-                            field: "sensorSet",
+                            field: "sensorSetID",
                             title: i18n.Resources.SensorSet,
                             template: function(e) {
                                 return Format.kit.sensorSet(e);
