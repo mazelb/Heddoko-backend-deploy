@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/Inventory/_Assemblies.cshtml" hash="fffffffff9e71233" filehash="ffffd8b8770ea801" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Views_Inventory__Assemblies_cshtml">
+<preserve resultType="2" virtualPath="/Views/Inventory/_Assemblies.cshtml" hash="fffffffff9e71233" filehash="27f4c6bb5bc7" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Views_Inventory__Assemblies_cshtml">
   <filedeps>
     <filedep name="/Views/Inventory/_Assemblies.cshtml" />
   </filedeps>
