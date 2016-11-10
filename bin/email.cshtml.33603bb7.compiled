@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/Email/Email.cshtml" hash="fffffffff9e71233" filehash="6f444a4039a" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Views_Email_Email_cshtml">
+<preserve resultType="2" virtualPath="/Views/Email/Email.cshtml" hash="fffffffff9e71233" filehash="fffff90a8f7071be" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Views_Email_Email_cshtml">
   <filedeps>
     <filedep name="/Views/Email/Email.cshtml" />
   </filedeps>
