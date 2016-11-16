@@ -187,3 +187,19 @@ div.k-edit-form-container {
 .history-popup tr:nth-child(2n) {
   background-color: #c1bfc0; }
 
+#gauge-container {
+  text-align: center;
+  margin: 0 auto;
+  background: transparent url(../images/ui/linear-gauge-container.png) no-repeat 50% 50%;
+  padding: 18px;
+  width: 300px;
+  height: 400px; }
+
+#gauge {
+  height: 300px;
+  display: inline-block;
+  zoom: 1; }
+
+#gauge-row {
+  height: 200px; }
+

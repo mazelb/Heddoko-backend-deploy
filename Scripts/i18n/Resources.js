@@ -436,7 +436,17 @@ i18n.Resources = (function () {
   "UserIsNotInvited": "User should be invited",
   "UserDoesntHaveKit": "User should have a kit",
   "UserIsNotInTeam": "User should be in a team",
-  "WrongTeam": "User is in the wrong team"
+  "WrongTeam": "User is in the wrong team",
+  "LicenseIsExpiring": "License is expiring",
+  "StreamChannelOpened": "Channel for receiving stream was opened for your team",
+  "StreamChannelClosed": "Channel for receiving stream was closed for your team",
+  "LicenseAddedToOrganization": "License {0} has been added to your organization",
+  "LicenseExpired": "License {0} is expired",
+  "LicenseExpiring": "License {0} is expiring at {1}",
+  "LicenseRemovedFromOrganization": "License {0} has been removed from your organization",
+  "LicenseAddedToUser": "License {0} has been assigned to you",
+  "LicenseChangedForUser": "Your license has been changed to {0}",
+  "LicenseRemovedFromUser": "License {0} has been unassigned from you"
 };
 	return $.extend({}, i18n.Resources || {}, strings);
 }());
