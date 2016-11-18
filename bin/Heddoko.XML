@@ -535,6 +535,14 @@
             <param name="take">The amount of take entries</param>
             <param name="skip">The amoun of skip entries</param>
         </member>
+        <member name="M:Heddoko.Controllers.API.UsersAPIController.List(System.Int32,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+                List of records by organization
+            </summary>
+            <param name="userID">The filter by userID</param>
+            <param name="take">The amount of take entries</param>
+            <param name="skip">The amoun of skip entries</param>
+        </member>
         <member name="T:Snapbook.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator">
             <summary>
             Generates model descriptions for given types.

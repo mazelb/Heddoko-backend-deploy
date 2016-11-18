@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Areas/HelpPage/Views/Help/DisplayTemplates/ModelDescriptionLink.cshtml" hash="522cdc70" filehash="ffffc96233e84b2a" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Areas_HelpPage_Views_Help_DisplayTemplates_ModelDescriptionLink_cshtml">
+<preserve resultType="2" virtualPath="/Areas/HelpPage/Views/Help/DisplayTemplates/ModelDescriptionLink.cshtml" hash="522cdc70" filehash="ffffc9969a371355" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Areas_HelpPage_Views_Help_DisplayTemplates_ModelDescriptionLink_cshtml">
   <filedeps>
     <filedep name="/Areas/HelpPage/Views/Help/DisplayTemplates/ModelDescriptionLink.cshtml" />
   </filedeps>

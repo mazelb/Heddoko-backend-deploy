@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/Account/Invite.cshtml" hash="32422a0" filehash="2262e924d792" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Views_Account_Invite_cshtml">
+<preserve resultType="2" virtualPath="/Views/Account/Invite.cshtml" hash="32422a0" filehash="220cd8615ac0" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Views_Account_Invite_cshtml">
   <filedeps>
     <filedep name="/Views/Account/Invite.cshtml" />
   </filedeps>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Areas/MvcElmahDashboard/Views/Shared/_scripts.cshtml" hash="ffffffffc11a0f9a" filehash="fffff27b108524f0" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Areas_MvcElmahDashboard_Views_Shared__scripts_cshtml">
+<preserve resultType="2" virtualPath="/Areas/MvcElmahDashboard/Views/Shared/_scripts.cshtml" hash="ffffffffc11a0f9a" filehash="fffff24f2c9d1739" flags="110000" assembly="HeddokoAssembly" type="ASP._Page_Areas_MvcElmahDashboard_Views_Shared__scripts_cshtml">
   <filedeps>
     <filedep name="/Areas/MvcElmahDashboard/Views/Shared/_scripts.cshtml" />
   </filedeps>
