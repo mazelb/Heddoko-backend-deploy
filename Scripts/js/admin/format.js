@@ -244,7 +244,21 @@
             return '<span class="k-grid-showText">' + item + '</span>';
         },
         url: function (item) {
-            return item ? '<a href="' + item + '">' + i18n.Resources.Download + "</a>" : "";
+            if (item.url) {
+                return '<a href="' + item + '">' + i18n.Resources.Download + "</a>";
+            }
+
+            var html = '';
+            if (item.files) {
+                for (var i = 0; i < item.files.length; i++) {
+
+                    var type = Enums.AssetType.array[item.files[i].type].text;
+
+                    html += '<a href="' + item.files[i].url + '">' + i18n.Resources.Download + " " + type + "</a><br/>";
+                }
+            }
+
+            return html;
         },
         version: function (item) {
             if (item.firmware) {

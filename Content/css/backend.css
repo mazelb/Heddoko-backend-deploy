@@ -176,6 +176,12 @@ div.k-edit-form-container {
   div.k-edit-form-container .k-edit-field > * {
     width: 80%; }
 
+.asset-files {
+  margin: -0.167em -0.167em -0.167em -0.8em; }
+
+.asset-file-name {
+  min-width: 50%; }
+
 .history-popup table {
   border-collapse: collapse;
   width: 100%; }

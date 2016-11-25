@@ -448,7 +448,12 @@ i18n.Resources = (function () {
   "LicenseChangedForUser": "Your license has been changed to {0}",
   "LicenseRemovedFromUser": "License {0} has been unassigned from you",
   "IsInvalidMessage": "{0} is invalid",
-  "WrongFilesCount": "The number of files must be greater than or or equal to {0} and less than or equal to {1}"
+  "WrongFilesCount": "The number of files must be greater than or or equal to {0} and less than or equal to {1}",
+  "AssetType_AnalysisFrameData": "Analysis frame data",
+  "AssetType_ProcessedFrameData": "Processed frame data",
+  "AssetType_RawFrameData": "Raw frame data",
+  "FirmwareType_DefaultRecords": "Default records",
+  "AssetType": "Asset Type"
 };
 	return $.extend({}, i18n.Resources || {}, strings);
 }());
